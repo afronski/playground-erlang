@@ -1,0 +1,3 @@
+[submodule "wolves-and-rabbits-world-simulation"]
+	path = wolves-and-rabbits-world-simulation
+	url = https://github.com/afronski/wolves-and-rabbits-world-simulation
