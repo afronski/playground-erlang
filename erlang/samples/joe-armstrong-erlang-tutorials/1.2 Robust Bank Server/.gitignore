@@ -1,0 +1,7 @@
+# Binaries:
+*.beam
+*.dump
+
+# Mnesia storage:
+one*/
+two*/

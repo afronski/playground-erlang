@@ -1,0 +1,1 @@
+-record(account, { name, balance }).
