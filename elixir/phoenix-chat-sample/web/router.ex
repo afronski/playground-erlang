@@ -1,5 +1,6 @@
 defmodule PhoenixChatSample.Router do
   use Phoenix.Router
+  use Phoenix.Router.Socket, mount: "/ws"
 
   pipeline :browser do
     plug :accepts, ~w(html)
@@ -11,13 +12,10 @@ defmodule PhoenixChatSample.Router do
   end
 
   scope "/" do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PhoenixChatSample.PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api" do
-  #   pipe_through :api
-  # end
+  channel "room", PhoenixChatSample.RoomChannel
 end
