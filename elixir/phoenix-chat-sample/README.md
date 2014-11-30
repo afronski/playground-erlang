@@ -1,4 +1,4 @@
-# PhoenixStarter
+# PhoenixChatSample
 
 To start your new Phoenix application:
 

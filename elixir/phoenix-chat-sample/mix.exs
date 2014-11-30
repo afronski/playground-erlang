@@ -1,8 +1,8 @@
-defmodule PhoenixStarter.Mixfile do
+defmodule PhoenixChatSample.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :phoenix_starter,
+    [app: :phoenix_chat_sample,
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: ["lib", "web"],
@@ -14,7 +14,7 @@ defmodule PhoenixStarter.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [mod: {PhoenixStarter, []},
+    [mod: {PhoenixChatSample, []},
      applications: [:phoenix, :cowboy, :logger]]
   end
 

@@ -1,4 +1,4 @@
-defmodule PhoenixStarter.Router do
+defmodule PhoenixChatSample.Router do
   use Phoenix.Router
 
   pipeline :browser do
@@ -13,7 +13,7 @@ defmodule PhoenixStarter.Router do
   scope "/" do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PhoenixStarter.PageController, :index
+    get "/", PhoenixChatSample.PageController, :index
   end
 
   # Other scopes may use custom stacks.

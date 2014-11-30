@@ -1,4 +1,4 @@
-defmodule PhoenixStarter.PageController do
+defmodule PhoenixChatSample.PageController do
   use Phoenix.Controller
 
   plug :action

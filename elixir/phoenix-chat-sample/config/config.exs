@@ -6,18 +6,18 @@
 use Mix.Config
 
 # Configures the router
-config :phoenix, PhoenixStarter.Router,
+config :phoenix, PhoenixChatSample.Router,
   url: [host: "localhost"],
   http: [port: System.get_env("PORT")],
   secret_key_base: "ZzRqRZbnpngZ8jgWNKYcZpfxFz4kOlWIO0TCfpkWur50cnIq60qz34DgAoacHC4np3BMt/NDysfsA/EY/8W/jQ==",
   catch_errors: true,
   debug_errors: false,
-  error_controller: PhoenixStarter.PageController
+  error_controller: PhoenixChatSample.PageController
 
 # Session configuration
-config :phoenix, PhoenixStarter.Router,
+config :phoenix, PhoenixChatSample.Router,
   session: [store: :cookie,
-            key: "_phoenix_starter_key"]
+            key: "_phoenix_chat_sample_key"]
 
 # Configures Elixir's Logger
 config :logger, :console,

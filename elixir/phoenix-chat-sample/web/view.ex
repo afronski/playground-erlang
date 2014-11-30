@@ -1,4 +1,4 @@
-defmodule PhoenixStarter.View do
+defmodule PhoenixChatSample.View do
   use Phoenix.View, root: "web/templates"
 
   # The quoted expression returned by this block is applied
@@ -6,8 +6,8 @@ defmodule PhoenixStarter.View do
   using do
     quote do
       # Import common functionality
-      import PhoenixStarter.I18n
-      import PhoenixStarter.Router.Helpers
+      import PhoenixChatSample.I18n
+      import PhoenixChatSample.Router.Helpers
 
       # Use Phoenix.HTML to import all HTML functions (forms, tags, etc)
       use Phoenix.HTML

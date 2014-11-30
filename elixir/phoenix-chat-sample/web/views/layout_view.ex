@@ -1,4 +1,4 @@
-defmodule PhoenixStarter.LayoutView do
-  use PhoenixStarter.View
+defmodule PhoenixChatSample.LayoutView do
+  use PhoenixChatSample.View
 
 end

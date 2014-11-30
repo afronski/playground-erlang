@@ -11,7 +11,7 @@ use Mix.Config
 # Where those two env variables point to a file on
 # disk for the key and cert.
 
-config :phoenix, PhoenixStarter.Router,
+config :phoenix, PhoenixChatSample.Router,
   url: [host: "example.com"],
   http: [port: System.get_env("PORT")],
   secret_key_base: "ZzRqRZbnpngZ8jgWNKYcZpfxFz4kOlWIO0TCfpkWur50cnIq60qz34DgAoacHC4np3BMt/NDysfsA/EY/8W/jQ=="

@@ -1,2 +1,2 @@
-PhoenixStarter.Router.start
+PhoenixChatSample.Router.start
 ExUnit.start
