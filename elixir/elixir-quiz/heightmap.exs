@@ -48,10 +48,16 @@ defmodule PerlinNoise do
 end
 
 defmodule Heightmap do
-  @max_octaves 64
+  @max_octaves 32
   def create(n) do
+    << a :: size(32), b :: size(32), c :: size(32) >> = :crypto.rand_bytes(12)
+    :random.seed({ a, b, c })
+
     octaves = :random.uniform(@max_octaves) - 1
     persistence = :random.uniform
+
+    IO.puts("Octaves: #{octaves}")
+    IO.puts("Persistence: #{persistence}")
 
     1 .. n
       |> Stream.map(&(create_line(n, &1, persistence, octaves)))
@@ -65,7 +71,7 @@ defmodule Heightmap do
   end
 
   defp map_to_grayscale(value) do
-    pixel = abs(trunc(value * 255))
+    pixel = min(abs(trunc(value * 255)), 255)
 
     { pixel, pixel, pixel }
   end
