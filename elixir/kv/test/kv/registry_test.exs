@@ -10,14 +10,21 @@ defmodule KV.RegistryTest do
     end
   end
 
-  setup do
+  defp start_registry(ets) do
     { :ok, supervisor } = KV.Bucket.Supervisor.start_link
     { :ok, manager } = GenEvent.start_link
-    { :ok, registry } = KV.Registry.start_link(:registry_table, manager, supervisor)
+    { :ok, registry } = KV.Registry.start_link(ets, manager, supervisor)
 
     GenEvent.add_mon_handler(manager, Forwarder, self())
 
-    { :ok, registry: registry, ets: :registry_table }
+    registry
+  end
+
+  setup do
+    ets = :ets.new(:registry_table, [ :set, :public ])
+    registry = start_registry(ets)
+
+    { :ok, registry: registry, ets: ets }
   end
 
   test "sends events on create and crash", %{ registry: registry, ets: ets } do
@@ -53,6 +60,21 @@ defmodule KV.RegistryTest do
   test "removes bucket on crash", %{ registry: registry, ets: ets } do
     KV.Registry.create(registry, "shopping")
     { :ok, bucket } = KV.Registry.lookup(ets, "shopping")
+
+    Process.exit(bucket, :shutdown)
+    assert_receive { :exit, "shopping", ^bucket }
+
+    assert KV.Registry.lookup(ets, "shopping") == :error
+  end
+
+  test "monitors existing entries", %{ registry: registry, ets: ets } do
+    bucket = KV.Registry.create(registry, "shopping")
+
+    Process.unlink(registry)
+    Process.exit(registry, :shutdown)
+
+    start_registry(ets)
+    assert KV.Registry.lookup(ets, "shopping") == { :ok, bucket }
 
     Process.exit(bucket, :shutdown)
     assert_receive { :exit, "shopping", ^bucket }
