@@ -6,6 +6,8 @@ defmodule KV.Mixfile do
       app: :kv,
       version: "0.0.1",
       elixir: "~> 1.0",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
       deps: deps
     ]
   end

@@ -7,6 +7,7 @@ defmodule KV.Supervisor do
 
   @manager_name KV.EventManager
   @registry_name KV.Registry
+  @ets_registry_name KV.Registry
   @bucket_sup_name KV.Bucket.Supervisor
 
   def init(:ok) do
