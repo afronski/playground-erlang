@@ -14,12 +14,15 @@ defmodule KVServer.Mixfile do
 
   def application do
     [
-      applications: [ :logger ],
+      applications: [ :logger, :pipe, :kv ],
       mod: { KVServer, [] }
     ]
   end
 
   defp deps do
-    [ { :kv, in_umbrella: true } ]
+    [
+      { :kv, in_umbrella: true },
+      { :pipe, github: "batate/elixir-pipes" }
+    ]
   end
 end
