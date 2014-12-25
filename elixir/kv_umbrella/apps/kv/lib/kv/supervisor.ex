@@ -18,6 +18,7 @@ defmodule KV.Supervisor do
     children = [
       worker(GenEvent, [[ name: @manager_name]]),
       supervisor(KV.Bucket.Supervisor, [[ name: @bucket_sup_name ]]),
+      supervisor(Task.Supervisor, [[ name: KV.RouterTasks ]]),
       worker(KV.Registry, [
         ets, @manager_name, @bucket_sup_name, [ name: @registry_name ]
       ])
