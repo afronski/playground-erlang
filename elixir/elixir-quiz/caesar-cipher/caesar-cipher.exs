@@ -1,18 +1,42 @@
 defmodule CaesarCipher do
-  def encode(text, offset \\ 13) do
+  def encode(text, offset \\ 13)
+
+  def encode(_, offset) when offset < 0, do: raise "Offset has to be positive."
+  def encode(_, offset) when offset >= 26, do: raise "Offset has to be less than 26."
+
+  def encode(text, offset) do
     text
+    |> String.upcase
     |> String.codepoints
-    |> offsetize(&1, offset)
-    |> to_string
+    |> parallel_map(&extract_code/1)
+    |> parallel_map(&offsetize(&1, offset))
+    |> parallel_map(&encode_point/1)
+    |> Enum.join
   end
 
-  defp offsetize(character, offset) when character in 'A'..'Z' or character in 'a'..'z', do: character + offset
+  defp extract_code(codepoint) do
+    << point >> = codepoint
+    point
+  end
+
+  defp offsetize(character, offset) when character in 65..90, do: character + offset
   defp offsetize(character, _), do: character
+
+  defp encode_point(point) when point > 90, do: << point - 26 >>
+  defp encode_point(point), do: << point >>
+
+  defp parallel_map(collection, callback) do
+    me = self
+
+    collection
+    |> Enum.map(fn i -> spawn_link fn -> send me, { self, callback.(i) } end end)
+    |> Enum.map(fn pid -> receive do { ^pid, result } -> result end end)
+  end
 end
 
 ExUnit.start()
 
-defmodule CaesarCipher do
+defmodule CaesarCipherTest do
   use ExUnit.Case, async: true
 
   test "Encoding works with capital letters" do
@@ -24,14 +48,21 @@ defmodule CaesarCipher do
 
   test "Encoding works with small letters" do
     input  = "abcdefg"
-    output = "bcdefgh"
+    output = "BCDEFGH"
 
     assert CaesarCipher.encode(input, 1) == output
   end
 
   test "Encoding works with sentences" do
     input  = "abc def"
-    output = "bcd efg"
+    output = "BCD EFG"
+
+    assert CaesarCipher.encode(input, 1) == output
+  end
+
+  test "Testing end of alphabet" do
+    input  = "xyzXYZ"
+    output = "YZAYZA"
 
     assert CaesarCipher.encode(input, 1) == output
   end
@@ -40,6 +71,6 @@ defmodule CaesarCipher do
     input  = "ROT13ABC"
     output = "EBG13NOP"
 
-    assert CaesarCipher.encode(input, 1) == output
+    assert CaesarCipher.encode(input) == output
   end
 end
