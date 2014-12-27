@@ -1,4 +1,10 @@
 defmodule CaesarCipher do
+  def encode_file(path, offset \\ 13) do
+    path
+    |> File.read!
+    |> encode(offset)
+  end
+
   def encode(text, offset \\ 13)
 
   def encode(_, offset) when offset < 0, do: raise "Offset has to be positive."
@@ -72,5 +78,12 @@ defmodule CaesarCipherTest do
     output = "EBG13NOP"
 
     assert CaesarCipher.encode(input) == output
+  end
+
+  test "File encoding should work properly" do
+    input_file = "input.txt"
+    output = "EBG13NOP"
+
+    assert CaesarCipher.encode_file(input_file) == output
   end
 end
