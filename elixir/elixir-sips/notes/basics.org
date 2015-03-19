@@ -1,0 +1,111 @@
+* Elixir Sips - Basics
+
+** Installation
+
+- Installing instructions of official *Erlang* website.
+- Precompiled packages delivered by *Erlang Solutions*.
+
+** Types
+
+- *Atoms* - `:foo`, `:"some string"`.
+- *Integers* - `1234567`, `1_234_567`.
+  - As in *Erlang* - integers are unbounded, so you are limited only
+    the amount of RAM.
+- *Floating Point Number* - `0.75`, `30.23`.
+- *Lists* - `[1, 2, 3]`, `[:foo, 1, [:bar, "string"]]`.
+  - Implemented as *linked lists*.
+- *Tuples* - ordered non-homogeneous collection of fixed size.
+- *Keyword Lists* - `[name: "Wojtek Gawroński"]`.
+  - Syntax sugar over Erlang's *prop lists*
+- *Regex* - `Regex.replace %r/[aeiou]/, "Beginning Elixir", "z"`.
+- *Boolean* - Only `false` and `nil` are the only falsy values.
+
+** Pattern Matching
+
+- Pattern matching is an assignment to unbound variable name.
+  - If the match fail, you will receive `MatchError`.
+  - Bounding again the same variable causes an error.
+- It provides destructurization mechanism for complex types.
+  - You can match complex structures and extract value from it.
+- `_` is a *wildcard*, that can be bound multiple times.
+  - We don't care about value.
+  - You can prefix unused variables with `_`.
+- *Pinning variable* is a different concept, non-existing in Erlang.
+  - You can *rebind* variable with pattern matching, in order to avoid
+    that you have to use `^` sign before the variable name:
+
+    ```elixir
+    iex(1)> [a, 2] = [1, 2]
+    iex(2)> [^a, 2] = [3, 4]
+    ```
+
+    Without that symbol, `a` will be rebound to `3`.
+
+*** Pattern Matching in Function Definitions
+
+- As in *Erlang* you can create multi-head functions, where pattern
+  matching distinguish execution flow.
+
+*** Pattern Matching in Case Expression
+
+- *Case* is similar concept to the *switch* clauses in other
+  languages, but it is an expression.
+  - It uses *pattern matching* to determine which clause should be
+    evaluated based on provided input.
+
+** Functions
+
+Functions in *Elixir* are first-class types.
+
+*** Anonymous Functions
+
+- An *anonymous function* with *fn* keyword.
+
+  ```elixir
+  print_name = fn
+    {:person, first_name, last_name} ->
+      first_name <> " " <> last_name
+  end
+  ```
+
+  - Calling: `print_name.({:person, "W", "G"})`
+  - When no clause matches it throws `FunctionClauseError`.
+  - Immediate execution: `(fn -> "foo" end).()`
+
+*** Functions as first-class types
+
+- We can:
+  - Return a function.
+  - Pass them as argument.
+  - Create functions that are receiving functions as arguments.
+- If you are from *OOP* world, this behavior is similar to the
+  *Strategy* pattern.
+  - This design pattern is also called a *policy* or *closure*.
+
+** Modules
+
+- *Mix* - amazing tool, which is a bootstrap, build, task runner
+  tool. It is supported and delivered with standard *Elixir*
+  distribution (*Go*-like approach).
+- `defmodule` is responsible for creating a module structure.
+   - *Module* is a single unit of structure for your application.
+   - It is represented on the *Erlang VM* level.
+   - You can define module directly in *REPL*.
+     - Module definition will return tuple with an atom `:module`,
+       module name, byte code of compiled module and tuple
+       describing last function in that module.
+- You can easily provide documentation for module and each function,
+  - You can access module docs with helper
+    `h(:module_name_or_function_with_module_name)` in REPL.
+  - Or generate HTML documentation with use of `ExDoc`.
+    - You have to add it as a dependency in your project, install
+      dependencies and execute `mix docs`.
+
+** Unit Testing
+
+- *ExUnit* - built-in unit testing framework.
+- *exercism.io* - community based tool for working with katas.
+  - Build by *Katrina Owen* from Ruby community.
+- *DocTests* - putting the test cases inside docs comments.
+  - Put only this annotation inside unit test:
+    `doctest: ModuleName`.
