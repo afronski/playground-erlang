@@ -1,3 +1,17 @@
 * Elixir Sips - Tools and Libraries
 
 ** Dynamo
+
+- https://github.com/dynamo/dynamo
+- It is a *Sinatra*-like web framework written in *Elixir*.
+- Unfortunately it is discontinued - you should use *Plug* instead.
+
+** Ecto
+
+- https://github.com/elixir-lang/ecto
+- A database wrapper and language integrated query for Elixir.
+
+** Amnesia
+
+- https://github.com/meh/amnesia
+- Wrapper for Erlang's Mnesia database written in Elixir.

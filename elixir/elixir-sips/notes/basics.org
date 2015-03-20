@@ -109,3 +109,35 @@ Functions in *Elixir* are first-class types.
 - *DocTests* - putting the test cases inside docs comments.
   - Put only this annotation inside unit test:
     `doctest: ModuleName`.
+** Comprehensions
+
+- Syntax changed significantly:
+  - From: `lc x inlist [1,2,3], do: x*2`
+  - To: `for n <- [1,2,3], do: x*2`
+- General syntax is:
+  - `for GENERATOR+, FILTER*, do: LAMBDA_OR_DO_BLOCK
+  - New syntax supports *bitstrings*, *maps* etc.
+
+** Structs
+
+- `defrecord` became a `defstruct` in new version of Elixir.
+- *Records* were modules in Elixir and syntactic sugar around tuples
+  in *Erlang*, *Structs* are extensions built on top of maps that
+  provide compile-time checks and default values.
+- Since *0.13.0* records became deprecated.
+
+** Processes
+
+- Unit of concurrency in *Erlang* is a process.
+  - It encapsulates its own state and mechanisms.
+  - Only communicates with other processes by asynchronous *message
+    passing*.
+  - No shared state and memory!
+  - It is based on *Actor Model*.
+  - Each process has a *mailbox* which stores incoming messages.
+  - Code executed inside process is sequential.
+    - But multiple processes can run in parallel.
+- Again, syntax in *Elixir* slightly changed regarding message
+  passing:
+  - Old: `pid <- message`
+  - New: `send pid, message`
