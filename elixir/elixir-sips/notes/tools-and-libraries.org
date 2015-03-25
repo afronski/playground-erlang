@@ -15,3 +15,18 @@
 
 - https://github.com/meh/amnesia
 - Wrapper for Erlang's Mnesia database written in Elixir.
+
+** OTP
+
+*OTP* is a *Open Telecom Platform*. Set of libraries for building
+reliable and distributed systems.
+
+*** gen_server
+
+- Generic request/reply server implementation.
+- [[../OTP/gen_server_playground][Example implementation with tests]]
+
+*** gen_fsm
+
+- Generic *finite state machine* implementation.
+- [[../OTP/gen_fsm_playground][Example implementation with tests]]
