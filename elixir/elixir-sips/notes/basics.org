@@ -141,3 +141,14 @@ Functions in *Elixir* are first-class types.
   passing:
   - Old: `pid <- message`
   - New: `send pid, message`
+
+** Pipe operator
+
+- Creating pipeline of functions easily.
+  - Syntax sugar for invoking function with first argument passed from
+    the previous level output.
+  - `a |> b |> c` - output of function `a` is passed as a first argument
+    to `b` and so on.
+- Thinking in terms of *data transformation* or *data flow*.
+- Argument order invalid?
+  - Prepare *intermediate function* or *lambda* (ugly solution).
