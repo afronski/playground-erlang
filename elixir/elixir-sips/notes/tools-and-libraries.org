@@ -30,3 +30,93 @@ reliable and distributed systems.
 
 - Generic *finite state machine* implementation.
 - [[../OTP/gen_fsm_playground][Example implementation with tests]]
+
+** Standard Library
+
+*** Enum
+
+- `Enum.all?` - Returns `true` when all items in the collection
+  returns `true` for a provided *predicate*.
+- `Enum.any?` - Returns `true` when any item in the collection
+  returns `true` for a provided *predicate*.
+- `Enum.at` - Returns an item from collection by zero-based index. If
+  there is no such index, returns `nil`.
+- `Enum.chunks` - Returns chunks of collection by specified size, step
+  and padding.
+- `Enum.chunks_by` - Starts a new chunk at each place that returns
+  `true` for the provided *predicate*.
+- `Enum.concat` - Concatenates list of lists into a single list. Also
+  works with ranges.
+- `Enum.count` - It returns number of items in the collection, but
+  also with provided *predicate* it returns number of items that
+  returns `true` when applied to it.
+- `Enum.drop` - It drops the first `count` items in the collection.
+- `Enum.drop_while` - It drops items in the beginning of the
+  collection while *predicate* returns `true`.
+- `Enum.each` - Invokes *predicate* for each element in the
+  collection.
+- `Enum.empty?` - Returns `true` when collection is empty.
+- `Enum.fetch` - Returns tuple with atom `:ok` and element on the
+  given index in the collection if exists, or `:error` when it does
+  not. If you call it with `!` at the end, it raises an
+  `OutOfBoundsError` (this version returns only value, not a tuple
+  when succeeds).
+- `Enum.filter` - It filters the collection, by a given *predicate*.
+- `Enum.filter_map` - It filters and maps the value in the one
+  pass. You have to specify two *funs*.
+- `Enum.find` - It returns first item, which returns `true` from a
+  given *predicate*. You can specify a default, instead of `nil`.
+- `Enum.find_index` - As above, but it returns an index.
+- `Enum.find_value` - As above, but it returns value returned from a
+  provided *fun*.
+- `Enum.first` - Returns first element from the collection or `nil` if
+  the collection is empty.
+- `Enum.flat_map` - Returns a modified collection, modification is
+  performed by a *fun* provided in the invocation which has to return
+  a collection.
+- `Enum.join` - Joins a collection with a *joiner*. By default
+  *joiner* is an empty binary.
+- `Enum.map` - Maps a collection, each item in new collection is a
+  result of provided *fun*.
+- `Enum.map_join` - Maps and join collection at one pass. Defaults as
+  above.
+- `Enum.map_reduce` - Performs map-reduce on a collection in one
+  pass. Provided *fun* should return a tuple which has in first
+  element new mapped element and in second one updated accumulator.
+- `Enum.max` - Maximum value from collection.
+- `Enum.max_by` - Maximum value from collection transformed by a given
+  *fun*.
+- `Enum.min` - Minimum value from collection.
+- `Enum.min_by` - Minimum value from collection transformed by a given
+  *fun*.
+- `Enum.member?` - Checks if a value is a member of collection.
+- `Enum.partition` - Partitions a collection into two collections, one
+  collection contain elements which returned *truthy* value by a given
+  predicate, second one which returned *falsy* value.
+- `Enum.reduce` - Reducer across collection by a given *fun*. First
+  argument used as a starting value.
+- `Enum.reject` - Rejects values which are return `true` for a given
+  *predicate*.
+- `Enum.reverse` - Reverses the collection.
+- `Enum.shuffle` - Shuffles the collection.
+- `Enum.slice` - Returns a subset list for a given collections. It
+  expects an index and a size of subset.
+- `Enum.sort` - Merge sort algorithm invoked on a collection. You can
+  pass a *comparator fun*.
+- `Enum.split` - Splits a collection in a given index, if index is
+  negative it counts backwards
+- `Enum.split_while` - Splits a collection into two while *predicate*
+  returns `true`.
+- `Enum.take` - Takes first `n` elements from a collection.
+- `Enum.take_every` - It takes every element starting from the first
+  incremented by a provided `step`.
+- `Enum.take_while` - Takes first elements while *predicate* returns
+  `true`.
+- `Enum.to_list` - Converts collection to a list.
+- `Enum.uniq` - Removes duplicated items.
+- `Enum.with_index` - It returns collection where each element is a
+  tuple which contains an actual value and index (beware of order in a
+  tuple).
+- `Enum.zip` - Zips together two collections, resulting collection is
+  a list of tuples. If the second list is shorter, missing values are
+  filled with `nil`.
