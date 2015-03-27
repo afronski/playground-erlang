@@ -31,6 +31,11 @@ reliable and distributed systems.
 - Generic *finite state machine* implementation.
 - [[../OTP/gen_fsm_playground][Example implementation with tests]]
 
+*** gen_event
+
+- Generic *event handler and dispatcher* implementation.
+- [[../OTP/zeldacat][Example implementation with tests]]
+
 ** Standard Library
 
 *** Enum

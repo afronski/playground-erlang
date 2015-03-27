@@ -1,0 +1,2 @@
+defmodule Zeldacat do
+end
