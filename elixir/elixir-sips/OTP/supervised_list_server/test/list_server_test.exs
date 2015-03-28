@@ -3,7 +3,8 @@ defmodule ListServerTest do
 
   # Clear the list server before each test.
   setup do
-    ListServer.start_link
+    {:ok, list_data_pid} = ListData.start_link
+    ListServer.start_link list_data_pid
     ListServer.clear
   end
 

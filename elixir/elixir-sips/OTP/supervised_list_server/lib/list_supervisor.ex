@@ -3,12 +3,18 @@ defmodule ListSupervisor do
 
   ### Public API
   def start_link do
-    :supervisor.start_link(__MODULE__, [])
+    result = {:ok, supervisor} = :supervisor.start_link(__MODULE__, [])
+    start_workers(supervisor)
+    result
+  end
+
+  def start_workers(supervisor) do
+    {:ok, list_data} = :supervisor.start_child(supervisor, worker(ListData, []))
+    :supervisor.start_child(supervisor, worker(ListSubSupervisor, [list_data]))
   end
 
   ### Supervisor API
-  def init(list) do
-    child_processes = [ worker(ListServer, list) ]
-    supervise child_processes, strategy: :one_for_one
+  def init(_) do
+    supervise [], strategy: :one_for_one
   end
 end
