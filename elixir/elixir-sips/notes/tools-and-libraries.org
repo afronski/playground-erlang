@@ -36,6 +36,12 @@ reliable and distributed systems.
 - Generic *event handler and dispatcher* implementation.
 - [[../OTP/zeldacat][Example implementation with tests]]
 
+*** supervisor
+
+- Generic behavior for managing, observing and restarting other
+  processes.
+- [[../OTP/supervised_list_server][Example implementation with tests]]
+
 ** Standard Library
 
 *** Enum
