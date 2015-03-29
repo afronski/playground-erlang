@@ -10,6 +10,7 @@
 
 - https://github.com/elixir-lang/ecto
 - A database wrapper and language integrated query for Elixir.
+- [[../tools/ecto_test][Example usage]]
 
 ** Amnesia
 
