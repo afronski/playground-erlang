@@ -1,12 +1,16 @@
 defmodule EctoTest do
+  require Logger
   use Application
 
   def start(_type, _args) do
-    opts =  [
-      strategy: :one_for_one,
-      name: EctoTest.Supervisor
+    import Supervisor.Spec
+
+    children = [
+      supervisor(EctoTest.Supervisor, [])
     ]
 
-    Supervisor.start_link [], opts
+    Logger.debug "Application started."
+
+    Supervisor.start_link children, strategy: :one_for_one
   end
 end
