@@ -152,3 +152,45 @@ Functions in *Elixir* are first-class types.
 - Thinking in terms of *data transformation* or *data flow*.
 - Argument order invalid?
   - Prepare *intermediate function* or *lambda* (ugly solution).
+
+** Dict
+
+- *Dict* is a protocol, e.g. hash dictionary which provides
+  dictionary-like behavior. Example implementation from Elixir's
+  standard library is a HashDict.
+  - `HashDict.new` - Create new dictionary.
+  - `Dict.delete` - Remove one element by key.
+  - `Dict.drop` - As above, but enables deleting by multiple keys.
+  - `Dict.empty` - Returns an empty dictionary based on passed
+    dictionary.
+  - `Dict.equal?` - Compares strictly two dictionaries.
+  - `Dict.fetch` - Returns a tuple with atom `:ok` and value, or atom
+    `:error`.
+  - `Dict.fetch!` - As above, but it raises error or returns value,
+    not a tuple.
+  - `Dict.get` - Returns value or default for the corresponding
+    key. Or `nil` if dictionary does not have specified key.
+  - `Dict.has_key?` - Returns boolean that dictionary has provided
+    key.
+  - `Dict.keys` - Returns list of all keys, no order guaranteed.
+  - `Dict.merge` - Merge two dictionaries, in case of conflict value
+    from second dictionary wins. Or you can provide function for
+    resolving conflict in your way.
+  - `Dict.pop` - Returns value associated with key and modified
+    dictionary without that key. You can provide default value.
+  - `Dict.put` - Stores value under specified key and returns modified
+    dictionary. If key exists, it will replace the value.
+  - `Dict.put_new` - As above, but puts value only when key does not
+    exist.
+  - `Dict.size` - Returns number of elements in dictionary.
+  - `Dict.split` - Returns two dictionaries, one with keys specified
+    as an argument, and second with rest of keys.
+  - `Dict.take` - As above but returns only the first dictionary.
+  - `Dict.to_list` - List of key-value pairs stored in dictionary. No
+    order guaranteed.
+  - `Dict.update` - Updates a specified key by value returned from a
+    function passed to it and it returns modified dictionary.
+  - `Dict.update!` - As above, but it raises an exception if key is
+    not present.
+  - `Dict.values` - Returns list of all values in the dictionary. No
+    order guaranteed.
