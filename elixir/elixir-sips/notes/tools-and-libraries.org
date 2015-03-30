@@ -132,3 +132,7 @@ reliable and distributed systems.
 - `Enum.zip` - Zips together two collections, resulting collection is
   a list of tuples. If the second list is shorter, missing values are
   filled with `nil`.
+
+** xmerl
+
+- Built-in *Erlang* module for parsing *XML*.
