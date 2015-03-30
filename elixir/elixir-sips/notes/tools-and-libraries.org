@@ -140,10 +140,13 @@ reliable and distributed systems.
 
 ** HTTP Clients
 
-Note: none of modules presented below is an *Elixir* library:
+- Note: none of modules presented below is an *Elixir* library:
+  - httpc (built-in `:inets` client).
+  - ibrowse (external dependency).
+  - hackney (external dependency).
+- [[../tools/http_client_survey][Example usage]]
 
-- httpc (built-in `:inets` client).
-- ibrowse (external dependency).
-- hackney (external dependency).
+** ExActor
 
-[[../tools/http_client_survey][Example usage]]
+- Library that simplifies generation and using of `gen_server`.
+- [[../tools/exactor_test][Example usage]]
