@@ -43,6 +43,12 @@ reliable and distributed systems.
   processes.
 - [[../OTP/supervised_list_server][Example implementation with tests]]
 
+*** gen_tcp
+
+- Module with set of functions related with TCP connection handling
+  and sockets.
+- [[../OTP/tcp_server][Example implementation with tests]]
+
 ** Standard Library
 
 *** Enum
