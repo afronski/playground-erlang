@@ -1,0 +1,2 @@
+defmodule CurrentWeather do
+end

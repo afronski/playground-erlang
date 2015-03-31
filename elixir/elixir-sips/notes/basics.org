@@ -194,3 +194,7 @@ Functions in *Elixir* are first-class types.
     not present.
   - `Dict.values` - Returns list of all values in the dictionary. No
     order guaranteed.
+
+** Scripts
+
+- [[../tools/current_weather][Command line modules and Elixir Scripts]]
