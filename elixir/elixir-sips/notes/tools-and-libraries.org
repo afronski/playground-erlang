@@ -156,3 +156,11 @@ reliable and distributed systems.
 
 - Library that simplifies generation and using of `gen_server`.
 - [[../tools/exactor_test][Example usage]]
+
+** IEx.pry
+
+- Built-in inspection tool for running processes.
+  - After invoking `IEx.pry` it will ask you to allow open a new
+    session. After accepting that you will have access to the whole
+    lexical scope of actually running process.
+  - [[../tools/iex_pry_test][Sample project]]
