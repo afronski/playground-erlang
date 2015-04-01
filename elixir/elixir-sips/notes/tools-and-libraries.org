@@ -168,7 +168,12 @@ reliable and distributed systems.
 ** Elixiak
 
 - Elixir library for *Riak*.
+  - https://github.com/drewkerrigan/elixiak
   - Note: it is not compatible with *Elixir 1.0*.
 - [[../tools/elixiak_playground][Example usage with tests]]
 
 ** Weber
+
+- Elixir MVC web framework.
+  - https://github.com/elixir-web/weber
+  - Note: it is not compatible with *Elixir 1.0*.
