@@ -1,0 +1,9 @@
+%{"elixiak": {:git, "git://github.com/drewkerrigan/elixiak.git", "19f72474b8c92d57aeaa0695c2282d7d79a758bf", []},
+  "json": {:git, "git://github.com/cblage/elixir-json.git", "0b2839d6300b3a872f2aa3c1062fb5f3322fddbf", []},
+  "linguist": {:hex, :linguist, "0.1.5"},
+  "meck": {:git, "git://github.com/eproxus/meck.git", "dde759050eff19a1a80fd854d7375174b191665d", [tag: "0.8.2"]},
+  "pooler": {:hex, :pooler, "1.4.0"},
+  "protobuffs": {:git, "git://github.com/basho/erlang_protobuffs.git", "5257dfe4e000b58487af89b849c7336ffa9bae82", [tag: "0.8.1p4"]},
+  "riak-elixir-client": {:git, "git://github.com/drewkerrigan/riak-elixir-client.git", "5a8916b8a0c9ee30d656f0e5385edbcd3b8fd065", []},
+  "riak_pb": {:git, "git://github.com/basho/riak_pb.git", "fc18a9b37170431f659e08d66ed78e3f6bbc47ca", [tag: "2.0.0.16"]},
+  "riakc": {:git, "git://github.com/basho/riak-erlang-client.git", "c3fb38c0590876cd4864f4553bda52b46edd7bc7", [tag: "2.0.1"]}}

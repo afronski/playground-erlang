@@ -164,3 +164,11 @@ reliable and distributed systems.
     session. After accepting that you will have access to the whole
     lexical scope of actually running process.
   - [[../tools/iex_pry_test][Sample project]]
+
+** Elixiak
+
+- Elixir library for *Riak*.
+  - Note: it is not compatible with *Elixir 1.0*.
+- [[../tools/elixiak_playground][Example usage with tests]]
+
+** Weber
