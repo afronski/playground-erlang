@@ -177,3 +177,7 @@ reliable and distributed systems.
 - Elixir MVC web framework.
   - https://github.com/elixir-web/weber
   - Note: it is not compatible with *Elixir 1.0*.
+- Nice benchmark performed (with use of `wrk`):
+  - Rack (GET request with *Hello World*): ~350 req/s
+  - Node.js (GET request with *Hello World*): ~11k req/s
+  - Weber in Elixir (standard template, more than previous): ~14k req/s
