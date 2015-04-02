@@ -181,3 +181,8 @@ reliable and distributed systems.
   - Rack (GET request with *Hello World*): ~350 req/s
   - Node.js (GET request with *Hello World*): ~11k req/s
   - Weber in Elixir (standard template, more than previous): ~14k req/s
+
+** ExLager
+
+- Elixir wrapper for Basho library called *Lager*.
+- [[../OTP/supervised_list_server][Example usage]]
