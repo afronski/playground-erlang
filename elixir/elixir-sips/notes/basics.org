@@ -198,3 +198,13 @@ Functions in *Elixir* are first-class types.
 ** Scripts
 
 - [[../tools/current_weather][Command line modules and Elixir Scripts]]
+
+** Binaries
+
+- Syntax:
+  - `<<1, 2, 3>>`, `"foo"`
+  - `"foo" == <<'f', 'o', 'o'>> == <<102, 111, 111>>`
+- IPv4 packet:
+  - `<<4 :: [integer, size(4)], 5 :: [integer, size(4)]>>`
+  - `<<version :: [integer, size(4)], header_length :: [integer, size(4)]>> = "E"`
+- [[../tools/ip_parser][Example use case]]
