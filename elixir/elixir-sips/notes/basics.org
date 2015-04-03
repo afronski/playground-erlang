@@ -199,7 +199,7 @@ Functions in *Elixir* are first-class types.
 
 - [[../tools/current_weather][Command line modules and Elixir Scripts]]
 
-** Binaries
+** Binaries and Bitwise
 
 - Syntax:
   - `<<1, 2, 3>>`, `"foo"`
@@ -208,3 +208,57 @@ Functions in *Elixir* are first-class types.
   - `<<4 :: [integer, size(4)], 5 :: [integer, size(4)]>>`
   - `<<version :: [integer, size(4)], header_length :: [integer, size(4)]>> = "E"`
 - [[../tools/ip_parser][Example use case]]
+- `use Bitwise`.
+  - `band(7,8) == 0`
+  - `band(7,2) == 2`
+  - `bor(7,8) == 15`
+  - `bor(2,8) == 10`
+  - `bxor(7,8) == 15`
+  - `bxor(2,7) == 5`
+  - `bsl(1, 3) == 8`
+  - `0 |> bor(1<<18) |> bor(1<<20) |> bor(1<<22) |> bor(1<<24) |> bor(1<<28)`
+
+** File
+
+Note: all of functions has version with bang which raises an
+exception, rather than returning an error.
+
+- `File.cd` - Changing current working directory.
+- `File.chgrp` - Changes user group given by GID for a file/directory.
+- `File.chmod` - Changes UNIX file mode for a file/directory.
+- `File.chown` - Changes the owner given by UID of a file/directory.
+- `File.close` - Closes the file referenced by *file descriptor*.
+- `File.copy` - Copies source to destination, you can specify bytes
+  (default to `:infinity`).
+- `File.cp` - Copies source to destination preserving its mode. It has
+  callback for a decision about overriding a file.
+- `File.cp_r` - Copies source to destination recursively.
+- `File.cwd` - Gets the current working directory.
+- `File.dir?` - Checks if the passed path is a directory.
+- `File.exists?` - Checks if the passed path exists.
+- `File.ls` - Lists all files from a given directory.
+- `File.mkdir` - Creates a directory, like the `mkdir` command.
+- `File.mkdir_p` - Creates multiple directories, like the `mkdir -p`
+  command.
+- `File.open` - Opening a file, it returns a *file descriptor*. Nice
+  way to deal with files is to use `File.open/3` which given by path,
+  opening mode and callback, which will be executed on the file, and
+  file will be closed immediately after the callback returns
+  (successfully or not).
+- `File.read` - Reads data from the file, given by amount of bytes
+  (default: `:infinity`).
+- `File.regular?` - Returns true if the file is a regular file (not a
+  socket, device, directory etc.).
+- `File.rm` - Removes a file.
+- `File.rm_rf` - Removes files and directories recursively. Returns
+  list of removed files.
+- `File.rmdir` - Tries to delete a directory for a given path.
+- `File.stat` - Returns file stats or tuple with atom `:error` and
+  reason.
+- `File.stream!` - Streams file content, line by line.
+- `File.stream_to!` - Writes a stream to a file.
+- `File.touch` - Touches a file, by creating it or changing
+  modification dates.
+- `File.write` - Writes bytes to a *file descriptor*.
+- `File.write_stat` - Writes stats given as an argument to a file
+  passed as a path.
