@@ -186,3 +186,10 @@ reliable and distributed systems.
 
 - Elixir wrapper for Basho library called *Lager*.
 - [[../OTP/supervised_list_server][Example usage]]
+
+** Releases (*relex* and *pogo*)
+
+- Unit of deployment for Erlang is a *release*. It is an application
+  with *run-time system* and all necessary dependencies.
+  - Note: `pogo` and `relex` are not compatible with *Elixir 1.0*.
+  - [[../OTP/supervised_list_server][Example usage]]
