@@ -193,3 +193,21 @@ reliable and distributed systems.
   with *run-time system* and all necessary dependencies.
   - Note: `pogo` and `relex` are not compatible with *Elixir 1.0*.
   - [[../OTP/supervised_list_server][Example usage]]
+
+** Distribution
+
+- `iex --name "foo@0.0.0.0"` - the same as adding name to the Erlang
+  session.
+  - `:erlang.register(:shell, self)` - registering the named process
+    across the cluster.
+  - For local sessions, you don't have to setup a *cookie* (it is
+    already shared because of the file defined in your home
+    directory).
+    - For remote nodes you have to define the *identical cookie*, it
+      is the only security mechanism built-in to the Erlang VM.
+  - Joe Armstrong's favorite program:
+    ```
+    receive do
+      {:become, some_fn} -> some_fn.()
+    end
+    ```
