@@ -117,6 +117,14 @@ Functions in *Elixir* are first-class types.
 - General syntax is:
   - `for GENERATOR+, FILTER*, do: LAMBDA_OR_DO_BLOCK
   - New syntax supports *bitstrings*, *maps* etc.
+  - Generator can be anything which implements `Enumerable` protocol.
+  - With use of `into: %{}` you can push into anything that implements
+    `Enumerable` protocol.
+   ```
+   for line <- IO.stream(:stdio, :line),
+       into: IO.stream(:stdio, :line),
+       do: String.upcase(line)
+   ```
 
 ** Structs
 
@@ -262,3 +270,47 @@ exception, rather than returning an error.
 - `File.write` - Writes bytes to a *file descriptor*.
 - `File.write_stat` - Writes stats given as an argument to a file
   passed as a path.
+
+** Maps and Structs
+
+- New date structure introduced in *Erlang 17.0* and *Elixir 0.13*.
+  - `map = %{:foo => bar}` - Creating new map.
+  - `%{map | foo: "BAR" }` - Updating existing key.
+  - `map[:foo] == map.foo` - Ways for getting a key.
+  - `%{ foo: something } = map` - Pattern matching.
+- *Struct* is a tagged map.
+  - To create a *struct* you should provide `__struct__` function
+    implementation in a given module, that have to return a map.
+    ```
+    defmodule SomeStruct do
+      def __struct__ do
+        %{foo: "bar"}
+      end
+    end
+    ```
+  - `%SomeStruct{}` - Creating a new structure.
+  - Elixir provides a `defstruct` macro, which eases implementing
+    structs - it should be used inside the `defmodule`.
+    ```
+    defmodule Person do
+      defstruct first_name: nil, last_name: "Dudington"
+
+      def name(person) do
+        "#{person.first_name} #{person.last_name}"
+      end
+    end
+    ```
+    - `josh = %Person{first_name: "Josh"}`
+    - `Person.name(josh)`
+    - `%Person{josh | last_name: "Adams"}`
+    - `map = %{first_name: "Josh"}
+    - `%Person{map | first_name: "Lance"}`
+      - It raises an `BadStructError`.
+      - So it means that *structs* have static structure.
+
+*** Migrating Records to Structs (Tagged Maps)
+
+- Porting from records to structs maps is easy.
+  - The only thing that changes is the syntax (curly brackets) and
+    module definition because `defrecord` creates an internal module,
+    when a struct needs to be inside a module upfront.
