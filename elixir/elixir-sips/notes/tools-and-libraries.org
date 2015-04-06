@@ -211,3 +211,13 @@ reliable and distributed systems.
       {:become, some_fn} -> some_fn.()
     end
     ```
+
+** Plug
+
+- Web framework for *Elixir*.
+  - It allows you to built composable web applications.
+  - It is similar regarding behavior and features to *Ruby's Rack* or
+    *Python's WSGI*.
+  - Build as an replacement for *Dynamo*.
+
+** Quickie Synth
