@@ -219,3 +219,7 @@ reliable and distributed systems.
   - It is similar regarding behavior and features to *Ruby's Rack* or
     *Python's WSGI*.
   - Build as an replacement for *Dynamo*.
+
+** gs
+
+- Deprecated *Erlang* graphics subsystem, replaces by *wx*.
