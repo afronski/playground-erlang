@@ -314,3 +314,8 @@ exception, rather than returning an error.
   - The only thing that changes is the syntax (curly brackets) and
     module definition because `defrecord` creates an internal module,
     when a struct needs to be inside a module upfront.
+
+** Mix
+
+- Custom Tasks.
+  - [[../tools/custom_mix][Custom Mix tasks example]]
