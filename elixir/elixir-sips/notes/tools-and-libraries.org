@@ -1,55 +1,6 @@
 * Elixir Sips - Tools and Libraries
 
-** Dynamo
-
-- https://github.com/dynamo/dynamo
-- It is a *Sinatra*-like web framework written in *Elixir*.
-- Unfortunately it is discontinued - you should use *Plug* instead.
-
-** Ecto
-
-- https://github.com/elixir-lang/ecto
-- A database wrapper and language integrated query for Elixir.
-- [[../tools/ecto_test][Example usage]]
-
-** Amnesia
-
-- https://github.com/meh/amnesia
-- Wrapper for Erlang's Mnesia database written in Elixir.
-
-** OTP
-
-*OTP* is a *Open Telecom Platform*. Set of libraries for building
-reliable and distributed systems.
-
-*** gen_server
-
-- Generic request/reply server implementation.
-- [[../OTP/gen_server_playground][Example implementation with tests]]
-
-*** gen_fsm
-
-- Generic *finite state machine* implementation.
-- [[../OTP/gen_fsm_playground][Example implementation with tests]]
-
-*** gen_event
-
-- Generic *event handler and dispatcher* implementation.
-- [[../OTP/zeldacat][Example implementation with tests]]
-
-*** supervisor
-
-- Generic behavior for managing, observing and restarting other
-  processes.
-- [[../OTP/supervised_list_server][Example implementation with tests]]
-
-*** gen_tcp
-
-- Module with set of functions related with TCP connection handling
-  and sockets.
-- [[../OTP/tcp_server][Example implementation with tests]]
-
-** Standard Library
+** Elixir Standard Library
 
 *** Enum
 
@@ -139,62 +90,68 @@ reliable and distributed systems.
   a list of tuples. If the second list is shorter, missing values are
   filled with `nil`.
 
-** xmerl
+** Erlang Standard Library
+
+*** gs
+
+- Deprecated *Erlang* graphics subsystem, replaces by *wx*.
+  - It will be removed in incoming release - *18.0*.
+
+*** xmerl
 
 - Built-in *Erlang* module for parsing *XML*.
 - [[../tools/xml_parsing][Example usage]]
 
-** HTTP Clients
+*** dbg
 
-- Note: none of modules presented below is an *Elixir* library:
-  - httpc (built-in `:inets` client).
-  - ibrowse (external dependency).
-  - hackney (external dependency).
-- [[../tools/http_client_survey][Example usage]]
+- Tracing functions, processes and messages in *Erlang* / *Elixir*.
+  - Help methods - `:dbg.h`
+  - List of actual traces - `:dbg.i`
+  - Trace invocation - `:dbg.c(:"Elixir.Foo", :bar, [])`
+  - Start tracer server - `:dbg.tracer`
+    - Trace process interactions - `:dbg.p(pid, [:m, :procs])`
 
-** ExActor
+*** ssh
 
-- Library that simplifies generation and using of `gen_server`.
-- [[../tools/exactor_test][Example usage]]
+- Built-in module for interacting with SSH.
+- OTP is shipped with an implementation of SSH daemon.
+  - You can connect to it from the any authorized *Erlang* shell.
+  - Interacting with *Elixir* code needs to be done in particular way,
+    but it is pleasant and possible.
 
-** IEx.pry
+** OTP
 
-- Built-in inspection tool for running processes.
-  - After invoking `IEx.pry` it will ask you to allow open a new
-    session. After accepting that you will have access to the whole
-    lexical scope of actually running process.
-  - [[../tools/iex_pry_test][Sample project]]
+*OTP* is a *Open Telecom Platform*. Set of libraries for building
+reliable and distributed systems.
 
-** Elixiak
+*** gen_server
 
-- Elixir library for *Riak*.
-  - https://github.com/drewkerrigan/elixiak
-  - Note: it is not compatible with *Elixir 1.0*.
-- [[../tools/elixiak_playground][Example usage with tests]]
+- Generic request/reply server implementation.
+- [[../OTP/gen_server_playground][Example implementation with tests]]
 
-** Weber
+*** gen_fsm
 
-- Elixir MVC web framework.
-  - https://github.com/elixir-web/weber
-  - Note: it is not compatible with *Elixir 1.0*.
-- Nice benchmark performed (with use of `wrk`):
-  - Rack (GET request with *Hello World*): ~350 req/s
-  - Node.js (GET request with *Hello World*): ~11k req/s
-  - Weber in Elixir (standard template, more than previous): ~14k req/s
+- Generic *finite state machine* implementation.
+- [[../OTP/gen_fsm_playground][Example implementation with tests]]
 
-** ExLager
+*** gen_event
 
-- Elixir wrapper for Basho library called *Lager*.
-- [[../OTP/supervised_list_server][Example usage]]
+- Generic *event handler and dispatcher* implementation.
+- [[../OTP/zeldacat][Example implementation with tests]]
 
-** Releases (*relex* and *pogo*)
+*** supervisor
 
-- Unit of deployment for Erlang is a *release*. It is an application
-  with *run-time system* and all necessary dependencies.
-  - Note: `pogo` and `relex` are not compatible with *Elixir 1.0*.
-  - [[../OTP/supervised_list_server][Example usage]]
+- Generic behavior for managing, observing and restarting other
+  processes.
+- [[../OTP/supervised_list_server][Example implementation with tests]]
 
-** Distribution
+*** gen_tcp
+
+- Module with set of functions related with TCP connection handling
+  and sockets.
+- [[../OTP/tcp_server][Example implementation with tests]]
+
+*** Distribution
 
 - `iex --name "foo@0.0.0.0"` - the same as adding name to the Erlang
   session.
@@ -212,6 +169,29 @@ reliable and distributed systems.
     end
     ```
 
+** Ecto
+
+- https://github.com/elixir-lang/ecto
+- A database wrapper and language integrated query for Elixir.
+- [[../tools/ecto_test][Example usage]]
+
+** Amnesia
+
+- https://github.com/meh/amnesia
+- Wrapper for Erlang's Mnesia database written in Elixir.
+** HTTP Clients
+
+- Note: none of modules presented below is an *Elixir* library:
+  - httpc (built-in `:inets` client).
+  - ibrowse (external dependency).
+  - hackney (external dependency).
+- [[../tools/http_client_survey][Example usage]]
+
+** ExActor
+
+- Library that simplifies generation and using of `gen_server`.
+- [[../tools/exactor_test][Example usage]]
+
 ** Plug
 
 - Web framework for *Elixir*.
@@ -220,6 +200,47 @@ reliable and distributed systems.
     *Python's WSGI*.
   - Build as an replacement for *Dynamo*.
 
-** gs
+** Weber
 
-- Deprecated *Erlang* graphics subsystem, replaces by *wx*.
+- Elixir MVC web framework.
+  - https://github.com/elixir-web/weber
+  - Note: it is not compatible with *Elixir 1.0*.
+- Nice benchmark performed (with use of `wrk`):
+  - Rack (GET request with *Hello World*): ~350 req/s
+  - Node.js (GET request with *Hello World*): ~11k req/s
+  - Weber in Elixir (standard template, more than previous): ~14k req/s
+
+** IEx.pry
+
+- Built-in inspection tool for running processes.
+  - After invoking `IEx.pry` it will ask you to allow open a new
+    session. After accepting that you will have access to the whole
+    lexical scope of actually running process.
+  - [[../tools/iex_pry_test][Sample project]]
+
+** Deprecated / Abandoned Libraries
+
+*** Elixiak
+
+- Elixir library for *Riak*.
+  - https://github.com/drewkerrigan/elixiak
+  - Note: it is not compatible with *Elixir 1.0*.
+- [[../tools/elixiak_playground][Example usage with tests]]
+
+*** Dynamo
+
+- https://github.com/dynamo/dynamo
+- It is a *Sinatra*-like web framework written in *Elixir*.
+- Unfortunately it is discontinued - you should use *Plug* instead.
+
+*** ExLager
+
+- Elixir wrapper for Basho library called *Lager*.
+- [[../OTP/supervised_list_server][Example usage]]
+
+*** Releases (*relex* and *pogo*)
+
+- Unit of deployment for Erlang is a *release*. It is an application
+  with *run-time system* and all necessary dependencies.
+  - Note: `pogo` and `relex` are not compatible with *Elixir 1.0*.
+  - [[../OTP/supervised_list_server][Example usage]]
