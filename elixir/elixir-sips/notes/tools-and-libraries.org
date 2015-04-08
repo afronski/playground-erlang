@@ -169,6 +169,24 @@ reliable and distributed systems.
     end
     ```
 
+*** Port
+
+- Interacting with external programs, as if they are acting as a
+  simple process.
+  - `Port.open({:spawn, "ls"}, [])`
+    - You received result asynchronously, to your mailbox as a normal
+      message from the different process.
+  - Another example:
+    ```
+    port = Port.open(
+      {:spawn, "bash --noediting -i"},
+      [:stderr_to_stdout, :binary, :exit_status]
+    )
+    ```
+    - Interacting:
+      - `send(port, {self, {:command, "pwd\n"}})`
+      - `send(port, {self, {:command, <<27>>}})`
+
 ** Ecto
 
 - https://github.com/elixir-lang/ecto
