@@ -218,6 +218,12 @@ reliable and distributed systems.
     *Python's WSGI*.
   - Build as an replacement for *Dynamo*.
 
+*** Plug.Static
+
+- Serving static assets with proper *mime/type* by default
+  from directory `/priv/static`.
+  - You can use it instead the complicated *Cowboy* handler.
+
 ** Weber
 
 - Elixir MVC web framework.
