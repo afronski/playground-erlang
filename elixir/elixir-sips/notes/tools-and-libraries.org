@@ -187,6 +187,23 @@ reliable and distributed systems.
       - `send(port, {self, {:command, "pwd\n"}})`
       - `send(port, {self, {:command, <<27>>}})`
 
+*** Observer
+
+- Graphical tool for inspection a running *Erlang* / *Elixir* system
+  and its processes.
+  - `:observer.start`
+
+** Hex
+
+- Package manager and repository for *BEAM* languages.
+  - Not only limited to the *Elixir* environment.
+  - List of local tasks - `mix local`.
+    - Searching packages - `mix hex.search actor`.
+    - Package information - `mix hex.info exactor`.
+  - Using *API* pragmatically:
+    - `Hex.API.get_package("exactor")`
+    - `Hex.API.get_release("exactor", "0.3.0")`
+
 ** Ecto
 
 - https://github.com/elixir-lang/ecto
