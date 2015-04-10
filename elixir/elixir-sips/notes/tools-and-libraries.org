@@ -259,6 +259,23 @@ reliable and distributed systems.
     lexical scope of actually running process.
   - [[../tools/iex_pry_test][Sample project]]
 
+** ExConf
+
+- Nice module for managing configuration with built-in DSL.
+  - It is very easy to create multiple configuration environments.
+
+** Deployment (Heroku)
+
+- `BUILD_PACK_URL=https://github.com/HashNuke/heroku-buildpack-elixir.git`
+  - `heroku create --buildpack $BUILD_PACK_URL"`
+  - `elixir_buildpack.config` - BEAM configuration file.
+    - `erlang_version=17.5`
+    - `elixir_version=1.0.4`
+    - `rebar_version=(tag 2.5.1)`
+    - `always_build_deps=false`
+  - `Procfile` - Process configuration.
+    - `web: MIX_ENV=prod mix run --no-halt`
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
