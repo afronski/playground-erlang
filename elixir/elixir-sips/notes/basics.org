@@ -319,3 +319,21 @@ exception, rather than returning an error.
 
 - Custom Tasks.
   - [[../tools/custom_mix][Custom Mix tasks example]]
+
+** Process Dictionary
+
+- Process-local state, beware of that:
+  - You likely should never use it!
+  - It can destroy all benefits of functional programming.
+  - You can introduce easily side-effects or global, mutable
+    state. Even the local mutable state can be dangerous.
+- Core piece of *Erlang VM*.
+- Functions:
+  - `Process.put(:foo, "bar")` - Store value under given key.
+  - `Process.get(:foo)` - Get value from dictionary.
+  - `Process.get(:foo, "baz")` - As above, but with default value.
+  - `Process.get_keys("bar")` - List all keys with that value.
+  - `Process.get` - Get full dictionary out of process.
+  - `:erlang.erase` - Delete all items (no *Elixir* function).
+  - Process dictionary is available also in:
+    - `Process.info(pid)`
