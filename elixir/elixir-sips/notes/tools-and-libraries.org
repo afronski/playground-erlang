@@ -193,6 +193,12 @@ reliable and distributed systems.
   and its processes.
   - `:observer.start`
 
+*** Digraph
+
+- Erlang built-in module which represents a directed graph data
+  structure and related algorithms.
+  - [[../tools/digraph_maps][Example use case]]
+
 ** Hex
 
 - Package manager and repository for *BEAM* languages.
