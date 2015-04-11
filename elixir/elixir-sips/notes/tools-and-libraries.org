@@ -199,6 +199,14 @@ reliable and distributed systems.
   structure and related algorithms.
   - [[../tools/digraph_maps][Example use case]]
 
+*** ETS and DETS
+
+- *ETS* stands for *Erlang Term Storage* which is an in-memory
+  key-value store built-in to Erlang's platform.
+  - It has also persistent version called *DETS*
+    (*Disk Erlang Term Storage*).
+  - [[../tools/ets_playground][Example use case for both]]
+
 ** Hex
 
 - Package manager and repository for *BEAM* languages.
