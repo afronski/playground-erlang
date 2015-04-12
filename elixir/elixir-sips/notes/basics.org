@@ -357,3 +357,28 @@ exception, rather than returning an error.
     file_stream |> Stream.take_every(200) |> Enum.take(10)
     file_stream |> Stream.drop(2000) |> Stream.take(4) |> Enum.to_list |> Stream.cycle |> Enum.take(20)
     ```
+
+** Errors and Exceptions
+
+- Example:
+  - `1 / 0` - it throws an `ArithmeticError`.
+- How to throw an error:
+  - `raise ArithmeticError, message: nope.jpg`
+  - `raise "some runtime error"`
+- You can define your own error with `defexception`.
+- Catching an error (it should be rarely used):
+  ```
+  try do
+    raise RuntimeError, message: "nope"
+  rescue
+    e in RuntimeError ->
+      IO.puts "Caught an error: #{inspect e}"
+  end
+  ```
+  - Standard library returns a tuple with error and reason, but also
+    sometimes it defines function with bang at the end, which throws
+    an error.
+    - If you would like to implement such convention by
+      yourself you should provide both methods, and that one with the
+      bang should be built on top of previous one, with adding the
+      exception only.
