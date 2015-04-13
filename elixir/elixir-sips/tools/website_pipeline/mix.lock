@@ -1,0 +1,2 @@
+%{"httpotion": {:hex, :httpotion, "2.0.0"},
+  "ibrowse": {:git, "git://github.com/cmullaparthi/ibrowse.git", "e18ea912b62b0f4a48d0f0edc8bb2f542863a88c", []}}

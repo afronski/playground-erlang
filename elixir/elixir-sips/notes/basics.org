@@ -338,26 +338,6 @@ exception, rather than returning an error.
   - Process dictionary is available also in:
     - `Process.info(pid)`
 
-** Streams
-
-- Lazy, composable enumerables.
-  - `Stream.repeatedly(fn() -> 1 end) |> Enum.take(10)`
-  - `Stream.repeatedly(&:random.uniform/0) |> Enum.take(10)`
-  - `Stream.cycle([1,2,3]) |> Enum.take(10)`
-  - Bigger example:
-    ```
-    file_stream = Stream.resource(fn -> File.open!("/usr/share/dict/words") end,
-                                  fn(file) ->
-                                    case IO.read(file, :line) do
-                                      data when is_binary(data) -> {data, file}
-                                      _ -> nil
-                                    end
-                                  end,
-                                  fn(file) -> File.close(file) end)
-    file_stream |> Stream.take_every(200) |> Enum.take(10)
-    file_stream |> Stream.drop(2000) |> Stream.take(4) |> Enum.to_list |> Stream.cycle |> Enum.take(20)
-    ```
-
 ** Errors and Exceptions
 
 - Example:

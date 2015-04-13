@@ -90,6 +90,38 @@
   a list of tuples. If the second list is shorter, missing values are
   filled with `nil`.
 
+*** Streams
+
+- Lazy, composable enumerables.
+  - `Stream.repeatedly(fn() -> 1 end) |> Enum.take(10)`
+  - `Stream.repeatedly(&:random.uniform/0) |> Enum.take(10)`
+  - `Stream.cycle([1,2,3]) |> Enum.take(10)`
+  - Bigger example:
+    ```
+    file_stream = Stream.resource(fn -> File.open!("/usr/share/dict/words") end,
+                                  fn(file) ->
+                                    case IO.read(file, :line) do
+                                      data when is_binary(data) -> {data, file}
+                                      _ -> nil
+                                    end
+                                  end,
+                                  fn(file) -> File.close(file) end)
+    file_stream |> Stream.take_every(200) |> Enum.take(10)
+    file_stream |> Stream.drop(2000) |> Stream.take(4) |> Enum.to_list |> Stream.cycle |> Enum.take(20)
+    ```
+
+*** Agent
+
+- Simple abstraction around state.
+  - Replacement for `gen_server` which only modifies the state.
+  - [[../tools/agent_playground][Example usage]]
+
+*** Task
+
+- Simple abstraction for computing a value in the background and
+  receiving the value asynchronously later.
+  - [[../tools/website_pipeline][Example usage]]
+
 ** Erlang Standard Library
 
 *** gs
