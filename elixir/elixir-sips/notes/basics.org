@@ -320,6 +320,11 @@ exception, rather than returning an error.
 - Custom Tasks.
   - [[../tools/custom_mix][Custom Mix tasks example]]
 
+** Protocols
+
+- Polymorphism mechanism built-in *Elixir*.
+  - [[../tools/odd_protocol][Example usage]]
+
 ** Process Dictionary
 
 - Process-local state, beware of that:

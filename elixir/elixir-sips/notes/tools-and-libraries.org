@@ -310,6 +310,14 @@ reliable and distributed systems.
 - Nice module for managing configuration with built-in DSL.
   - It is very easy to create multiple configuration environments.
 
+** Erlubi
+
+- Client library for the Ubigraph visualization server.
+  - [[../../../../echo-protocol-in-elixir/][Example usage example]]
+    - Red spheres are anonymous processes.
+    - Blue spheres are named processes.
+    - Green cubes are ports.
+
 ** Deployment (Heroku)
 
 - `BUILD_PACK_URL=https://github.com/HashNuke/heroku-buildpack-elixir.git`
