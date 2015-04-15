@@ -151,6 +151,13 @@
   - Interacting with *Elixir* code needs to be done in particular way,
     but it is pleasant and possible.
 
+*** pg2
+
+- A replacement for `pg` module that has better semantics for
+  distribution.
+  - `pg2` expands to *Process Group*.
+  - [[../tools/string_processes][Example use case]]
+
 ** OTP
 
 *OTP* is a *Open Telecom Platform*. Set of libraries for building
