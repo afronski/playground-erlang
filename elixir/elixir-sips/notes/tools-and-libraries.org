@@ -318,6 +318,12 @@ reliable and distributed systems.
     - Blue spheres are named processes.
     - Green cubes are ports.
 
+** EEx
+
+- Built-in templating language which allows you to embed Elixir code.
+  - It is similar to the *ERB*, *EJS* etc.
+  - [[../tools/eex_playground][Example usage]]
+
 ** Deployment (Heroku)
 
 - `BUILD_PACK_URL=https://github.com/HashNuke/heroku-buildpack-elixir.git`
