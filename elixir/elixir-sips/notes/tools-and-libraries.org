@@ -331,6 +331,11 @@ reliable and distributed systems.
   - It is similar to the *ERB*, *EJS* etc.
   - [[../tools/eex_playground][Example usage]]
 
+** Apex
+
+- External dependency which pretty prints *Elixir's* data structures.
+  - [[../tools/apex_playground][Example usage]]
+
 ** Deployment (Heroku)
 
 - `BUILD_PACK_URL=https://github.com/HashNuke/heroku-buildpack-elixir.git`
