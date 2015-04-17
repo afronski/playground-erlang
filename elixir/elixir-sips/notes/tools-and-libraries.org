@@ -336,6 +336,13 @@ reliable and distributed systems.
 - External dependency which pretty prints *Elixir's* data structures.
   - [[../tools/apex_playground][Example usage]]
 
+** exprotobuf
+
+- Protocol Buffers are easy cross-language serialization and
+  deserialization standard from Google.
+  - `exprotobuf` is an *Elixir* implementation of that standard.
+    - [[../tools/exprotobuf_playground][Example usage]]
+
 ** Deployment (Heroku)
 
 - `BUILD_PACK_URL=https://github.com/HashNuke/heroku-buildpack-elixir.git`
