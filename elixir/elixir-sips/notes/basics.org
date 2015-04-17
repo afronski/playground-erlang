@@ -109,6 +109,11 @@ Functions in *Elixir* are first-class types.
 - *DocTests* - putting the test cases inside docs comments.
   - Put only this annotation inside unit test:
     `doctest: ModuleName`.
+- Command `mix test --cover` generates code coverage.
+  - It uses built-in *Erlang* coverage tool.
+- There is an additional tool called *Coverex*.
+  - [[../tools/pcm_playground][Example usage]]
+
 ** Comprehensions
 
 - Syntax changed significantly:

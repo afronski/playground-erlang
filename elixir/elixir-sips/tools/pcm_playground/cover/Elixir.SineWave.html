@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Elixir.SineWave</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/source.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+  </head>
+
+  <body>
+    <div id="content">
+      <h1>Elixir.SineWave Coverage Source Code</h1>
+
+      <table class="source">
+        <thead>
+          <tr>
+            <th>Line Number</th><th>Covered Lines</th><th>Source Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="source"><td class="num"> 1</td> <td class="num"> </td> 
+<td class="elixir">
+
+	<a name="#Elixir.SineWave"></a>
+
+<pre class="irrelevant"> defmodule SineWave do
+</pre>
+</td>
+</tr> 
+<tr class="source"><td class="num"> 2</td> <td class="num"> 0</td> 
+<td class="elixir">
+
+<pre class="not_covered">   defstruct amplitude: 1, frequency: 440
+</pre>
+</td>
+</tr> 
+<tr class="source"><td class="num"> 3</td> <td class="num"> </td> 
+<td class="elixir">
+
+<pre class="irrelevant"> 
+</pre>
+</td>
+</tr> 
+<tr class="source"><td class="num"> 4</td> <td class="num"> </td> 
+<td class="elixir">
+
+	<a name="#Elixir.SineWave.value_at.2"></a>
+
+<pre class="irrelevant">   def value_at(%__MODULE__{amplitude: a, frequency: f}, time) do
+</pre>
+</td>
+</tr> 
+<tr class="source"><td class="num"> 5</td> <td class="num"> 0</td> 
+<td class="elixir">
+
+<pre class="not_covered">     angular_frequency = 2 * f * :math.pi
+</pre>
+</td>
+</tr> 
+<tr class="source"><td class="num"> 6</td> <td class="num"> 0</td> 
+<td class="elixir">
+
+<pre class="not_covered">     a * :math.sin(angular_frequency * time)
+</pre>
+</td>
+</tr> 
+<tr class="source"><td class="num"> 7</td> <td class="num"> </td> 
+<td class="elixir">
+
+<pre class="irrelevant">   end
+</pre>
+</td>
+</tr> 
+<tr class="source"><td class="num"> 8</td> <td class="num"> </td> 
+<td class="elixir">
+
+<pre class="irrelevant"> end
+</pre>
+</td>
+</tr> 
+
+        </tbody>
+      </table>
+
+    
+    <!-- ein paar Ideen: 
+    	* Tabelle explizit machen mit sehr kleinen Größen
+    	* spezielle Formatierungen (Keywords, ..) mit spans machen.
+    	* Beispiel: https://coveralls.io/files/233825459
+    -->
+
+    </div>
+  </body>
+</html>
