@@ -18,7 +18,7 @@ defmodule ExprotobufPlaygroundTest do
         },
         %Person{name: "Jose Valim", id: 2}
       ]
-                      }
+    }
 
     binary = Protobuf.Encoder.encode(addressbook, AddressBook.defs)
     addressbook2 = Protobuf.Decoder.decode(binary, AddressBook)
