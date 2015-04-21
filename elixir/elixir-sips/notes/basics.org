@@ -112,7 +112,7 @@ Functions in *Elixir* are first-class types.
 - Command `mix test --cover` generates code coverage.
   - It uses built-in *Erlang* coverage tool.
 - There is an additional tool called *Coverex*.
-  - [[../tools/pcm_playground][Example usage]]
+  - [[../samples/pcm_playground][Example usage]]
 
 ** Comprehensions
 
@@ -210,7 +210,7 @@ Functions in *Elixir* are first-class types.
 
 ** Scripts
 
-- [[../tools/current_weather][Command line modules and Elixir Scripts]]
+- [[../samples/current_weather][Command line modules and Elixir Scripts]]
 
 ** Binaries and Bitwise
 
@@ -220,7 +220,7 @@ Functions in *Elixir* are first-class types.
 - IPv4 packet:
   - `<<4 :: [integer, size(4)], 5 :: [integer, size(4)]>>`
   - `<<version :: [integer, size(4)], header_length :: [integer, size(4)]>> = "E"`
-- [[../tools/ip_parser][Example use case]]
+- [[../samples/ip_parser][Example use case]]
 - `use Bitwise`.
   - `band(7,8) == 0`
   - `band(7,2) == 2`
@@ -323,12 +323,12 @@ exception, rather than returning an error.
 ** Mix
 
 - Custom Tasks.
-  - [[../tools/custom_mix][Custom Mix tasks example]]
+  - [[../samples/custom_mix][Custom Mix tasks example]]
 
 ** Protocols
 
 - Polymorphism mechanism built-in *Elixir*.
-  - [[../tools/odd_protocol][Example usage]]
+  - [[../samples/odd_protocol][Example usage]]
 
 ** Process Dictionary
 
@@ -347,6 +347,12 @@ exception, rather than returning an error.
   - `:erlang.erase` - Delete all items (no *Elixir* function).
   - Process dictionary is available also in:
     - `Process.info(pid)`
+
+** Nested data structures
+
+- Features added in the *Elixir* 0.14 in order to manipulate nested
+  data structures much easier than previously.
+  - [[../samples/nested_playground][Example usage]]
 
 ** Errors and Exceptions
 

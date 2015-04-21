@@ -114,13 +114,13 @@
 
 - Simple abstraction around state.
   - Replacement for `gen_server` which only modifies the state.
-  - [[../tools/agent_playground][Example usage]]
+  - [[../samples/agent_playground][Example usage]]
 
 *** Task
 
 - Simple abstraction for computing a value in the background and
   receiving the value asynchronously later.
-  - [[../tools/website_pipeline][Example usage]]
+  - [[../samples/website_pipeline][Example usage]]
 
 ** Erlang Standard Library
 
@@ -132,7 +132,7 @@
 *** xmerl
 
 - Built-in *Erlang* module for parsing *XML*.
-- [[../tools/xml_parsing][Example usage]]
+  - [[../samples/xml_parsing][Example usage]]
 
 *** dbg
 
@@ -156,7 +156,7 @@
 - A replacement for `pg` module that has better semantics for
   distribution.
   - `pg2` expands to *Process Group*.
-  - [[../tools/string_processes][Example use case]]
+  - [[../samples/string_processes][Example use case]]
 
 ** OTP
 
@@ -166,29 +166,29 @@ reliable and distributed systems.
 *** gen_server
 
 - Generic request/reply server implementation.
-- [[../OTP/gen_server_playground][Example implementation with tests]]
+  - [[../samples/OTP/gen_server_playground][Example implementation with tests]]
 
 *** gen_fsm
 
 - Generic *finite state machine* implementation.
-- [[../OTP/gen_fsm_playground][Example implementation with tests]]
+  - [[../samples/OTP/gen_fsm_playground][Example implementation with tests]]
 
 *** gen_event
 
 - Generic *event handler and dispatcher* implementation.
-- [[../OTP/zeldacat][Example implementation with tests]]
+  - [[../samples/OTP/zeldacat][Example implementation with tests]]
 
 *** supervisor
 
 - Generic behavior for managing, observing and restarting other
   processes.
-- [[../OTP/supervised_list_server][Example implementation with tests]]
+  - [[../samples/OTP/supervised_list_server][Example implementation with tests]]
 
 *** gen_tcp
 
 - Module with set of functions related with TCP connection handling
   and sockets.
-- [[../OTP/tcp_server][Example implementation with tests]]
+  - [[../samples/OTP/tcp_server][Example implementation with tests]]
 
 *** Distribution
 
@@ -236,7 +236,7 @@ reliable and distributed systems.
 
 - Erlang built-in module which represents a directed graph data
   structure and related algorithms.
-  - [[../tools/digraph_maps][Example use case]]
+  - [[../samples/digraph_maps][Example use case]]
 
 *** ETS and DETS
 
@@ -244,7 +244,7 @@ reliable and distributed systems.
   key-value store built-in to Erlang's platform.
   - It has also persistent version called *DETS*
     (*Disk Erlang Term Storage*).
-  - [[../tools/ets_playground][Example use case for both]]
+  - [[../samples/ets_playground][Example use case for both]]
 
 ** Hex
 
@@ -261,7 +261,7 @@ reliable and distributed systems.
 
 - https://github.com/elixir-lang/ecto
 - A database wrapper and language integrated query for Elixir.
-- [[../tools/ecto_test][Example usage]]
+  - [[../samples/ecto_test][Example usage]]
 
 ** Amnesia
 
@@ -273,12 +273,12 @@ reliable and distributed systems.
   - httpc (built-in `:inets` client).
   - ibrowse (external dependency).
   - hackney (external dependency).
-- [[../tools/http_client_survey][Example usage]]
+- [[../samples/http_client_survey][Example usage]]
 
 ** ExActor
 
 - Library that simplifies generation and using of `gen_server`.
-- [[../tools/exactor_test][Example usage]]
+- [[../samples/exactor_test][Example usage]]
 
 ** Plug
 
@@ -310,7 +310,7 @@ reliable and distributed systems.
   - After invoking `IEx.pry` it will ask you to allow open a new
     session. After accepting that you will have access to the whole
     lexical scope of actually running process.
-  - [[../tools/iex_pry_test][Sample project]]
+  - [[../samples/iex_pry_test][Sample project]]
 
 ** ExConf
 
@@ -329,19 +329,19 @@ reliable and distributed systems.
 
 - Built-in templating language which allows you to embed Elixir code.
   - It is similar to the *ERB*, *EJS* etc.
-  - [[../tools/eex_playground][Example usage]]
+  - [[../samples/eex_playground][Example usage]]
 
 ** Apex
 
 - External dependency which pretty prints *Elixir's* data structures.
-  - [[../tools/apex_playground][Example usage]]
+  - [[../samples/apex_playground][Example usage]]
 
 ** exprotobuf
 
 - Protocol Buffers are easy cross-language serialization and
   deserialization standard from Google.
   - `exprotobuf` is an *Elixir* implementation of that standard.
-    - [[../tools/exprotobuf_playground][Example usage]]
+    - [[../samples/exprotobuf_playground][Example usage]]
 
 ** Deployment (Heroku)
 
@@ -362,7 +362,7 @@ reliable and distributed systems.
 - Elixir library for *Riak*.
   - https://github.com/drewkerrigan/elixiak
   - Note: it is not compatible with *Elixir 1.0*.
-- [[../tools/elixiak_playground][Example usage with tests]]
+- [[../samples/elixiak_playground][Example usage with tests]]
 
 *** Dynamo
 
@@ -373,11 +373,11 @@ reliable and distributed systems.
 *** ExLager
 
 - Elixir wrapper for Basho library called *Lager*.
-- [[../OTP/supervised_list_server][Example usage]]
+  - [[../samples/OTP/supervised_list_server][Example usage]]
 
 *** Releases (*relex* and *pogo*)
 
 - Unit of deployment for Erlang is a *release*. It is an application
   with *run-time system* and all necessary dependencies.
   - Note: `pogo` and `relex` are not compatible with *Elixir 1.0*.
-  - [[../OTP/supervised_list_server][Example usage]]
+  - [[../samples/OTP/supervised_list_server][Example usage]]
