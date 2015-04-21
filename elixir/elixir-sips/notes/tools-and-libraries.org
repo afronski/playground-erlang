@@ -355,6 +355,20 @@ reliable and distributed systems.
   - `Procfile` - Process configuration.
     - `web: MIX_ENV=prod mix run --no-halt`
 
+** BERT and BERT-RPC
+
+- *BERT* stands for *Binary ERlang Term* and it is a binary
+  serialization and interchange format used by
+  `erlang:term_to_binary/1`.
+  - *BERT-RPC* is a *RPC* mechanism which uses *BERT* packets as a
+    serialization.
+  - http://bert-rpc.org/
+  - It is trivial to setup communication between e.g. Ruby and
+    Elixir/Erlang.
+    - JavaScript: https://github.com/rustyio/BERT-JS
+    - Ruby: https://github.com/mojombo/bertrpc
+    - Python: https://pypi.python.org/pypi/bert/1.0.0
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
