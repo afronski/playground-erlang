@@ -43,9 +43,11 @@ defmodule AbacusServerTest do
     assert AbacusServer.divide(pid, 1, 0) == :error
   end
 
-  test "server should return an error when unknown operation is executed" do
+  test "server should know how to stop itself" do
     {:ok, pid} = AbacusServer.start_link()
+    AbacusServer.stop(pid)
 
-    assert GenServer.call(pid, {:unknown, 1, 0}) == :error
+    :timer.sleep 100
+    refute Process.alive?(pid)
   end
 end

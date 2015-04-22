@@ -43,20 +43,43 @@ defmodule AbacusServer do
     GenServer.call(pid, :get_history)
   end
 
+  def stop(pid) do
+    GenServer.cast(pid, :stop)
+  end
+
   # GenServer API.
 
-  def handle_call({operation, a, b} = message, _, history) do
+  def handle_call({:addition, a, b} = message, _, history) do
+    result = Abacus.addition(a, b)
+    {:reply, result, store_history(message, result, history)}
+  end
+
+  def handle_call({:subtraction, a, b} = message, _, history) do
+    result = Abacus.subtraction(a, b)
+    {:reply, result, store_history(message, result, history)}
+  end
+
+  def handle_call({:multiplication, a, b} = message, _, history) do
+    result = Abacus.multiplication(a, b)
+    {:reply, result, store_history(message, result, history)}
+  end
+
+  def handle_call({:division, a, b} = message, _, history) do
     result = try do
-      apply(Abacus, operation, [ a, b ])
-    rescue
-      _ -> :error
-    end
+               Abacus.division(a, b)
+             rescue
+               _ -> :error
+             end
 
     {:reply, result, store_history(message, result, history)}
   end
 
   def handle_call(:get_history, _, history) do
     {:reply, Enum.reverse(history), history}
+  end
+
+  def handle_cast(:stop, history) do
+    {:stop, :normal, history}
   end
 
   # Private implementation.
