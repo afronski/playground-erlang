@@ -2,22 +2,13 @@ defmodule AbacusServerTest do
   use ExUnit.Case
 
   test "server should know how to add" do
-    {:ok, pid} = AbacusServer.start_link([])
+    {:ok, pid} = AbacusServer.start_link()
 
     assert AbacusServer.add(pid, 2, 2) == 4
   end
 
-  test "server return its operations history passed on the beginning" do
-    {:ok, pid} = AbacusServer.start_link([{{:addition, 2, 2}, 4}])
-
-    result = AbacusServer.get_history(pid)
-
-    assert Enum.count(result) == 1
-    assert [ {{:addition, 2, 2}, 4} ] = result
-  end
-
   test "server should return its executed operation history" do
-    {:ok, pid} = AbacusServer.start_link([])
+    {:ok, pid} = AbacusServer.start_link()
 
     AbacusServer.add(pid, 3, 3)
     AbacusServer.add(pid, 2, 2)
@@ -29,31 +20,31 @@ defmodule AbacusServerTest do
   end
 
   test "server should know how to subtract" do
-    {:ok, pid} = AbacusServer.start_link([])
+    {:ok, pid} = AbacusServer.start_link()
 
     assert AbacusServer.subtract(pid, 2, 2) == 0
   end
 
   test "server should know how to multiply" do
-    {:ok, pid} = AbacusServer.start_link([])
+    {:ok, pid} = AbacusServer.start_link()
 
     assert AbacusServer.multiply(pid, 2, 4) == 8
   end
 
   test "server should know how to divide" do
-    {:ok, pid} = AbacusServer.start_link([])
+    {:ok, pid} = AbacusServer.start_link()
 
     assert AbacusServer.divide(pid, 1, 2) == 0.5
   end
 
   test "server should know return an error" do
-    {:ok, pid} = AbacusServer.start_link([])
+    {:ok, pid} = AbacusServer.start_link()
 
     assert AbacusServer.divide(pid, 1, 0) == :error
   end
 
   test "server should return an error when unknown operation is executed" do
-    {:ok, pid} = AbacusServer.start_link([])
+    {:ok, pid} = AbacusServer.start_link()
 
     assert GenServer.call(pid, {:unknown, 1, 0}) == :error
   end

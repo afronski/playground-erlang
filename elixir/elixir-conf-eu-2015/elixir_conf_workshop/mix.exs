@@ -11,7 +11,8 @@ defmodule ElixirConfWorkshop.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger],
+     mod: {AbacusApplication, []}]
   end
 
   defp deps do

@@ -15,6 +15,10 @@ defmodule AbacusServer do
   #
   # GenServer.call(__MODULE__, {:add, a, b})
 
+  def start_link() do
+    GenServer.start_link(__MODULE__, [], [])
+  end
+
   def start_link(history) do
     GenServer.start_link(__MODULE__, history, [])
   end
@@ -40,10 +44,6 @@ defmodule AbacusServer do
   end
 
   # GenServer API.
-
-  def init(history) do
-    {:ok, history}
-  end
 
   def handle_call({operation, a, b} = message, _, history) do
     result = try do
