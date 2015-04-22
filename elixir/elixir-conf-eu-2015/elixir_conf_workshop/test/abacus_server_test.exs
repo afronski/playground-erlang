@@ -8,12 +8,12 @@ defmodule AbacusServerTest do
   end
 
   test "server return its operations history passed on the beginning" do
-    {:ok, pid} = AbacusServer.start_link([{{:add, 2, 2}, 4}])
+    {:ok, pid} = AbacusServer.start_link([{{:addition, 2, 2}, 4}])
 
     result = AbacusServer.get_history(pid)
 
     assert Enum.count(result) == 1
-    assert [ {{:add, 2, 2}, 4} ] = result
+    assert [ {{:addition, 2, 2}, 4} ] = result
   end
 
   test "server should return its executed operation history" do
@@ -25,7 +25,7 @@ defmodule AbacusServerTest do
     result = AbacusServer.get_history(pid)
 
     assert Enum.count(result) == 2
-    assert [ {{:add, 3, 3}, 6} | _rest ] = result
+    assert [ {{:addition, 3, 3}, 6} | _rest ] = result
   end
 
   test "server should know how to subtract" do
@@ -50,5 +50,11 @@ defmodule AbacusServerTest do
     {:ok, pid} = AbacusServer.start_link([])
 
     assert AbacusServer.divide(pid, 1, 0) == :error
+  end
+
+  test "server should return an error when unknown operation is executed" do
+    {:ok, pid} = AbacusServer.start_link([])
+
+    assert GenServer.call(pid, {:unknown, 1, 0}) == :error
   end
 end

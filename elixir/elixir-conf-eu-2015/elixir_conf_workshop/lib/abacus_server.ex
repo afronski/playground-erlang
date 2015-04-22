@@ -20,19 +20,19 @@ defmodule AbacusServer do
   end
 
   def add(pid, a, b) do
-    GenServer.call(pid, {:add, a, b})
+    GenServer.call(pid, {:addition, a, b})
   end
 
   def subtract(pid, a, b) do
-    GenServer.call(pid, {:subtract, a, b})
+    GenServer.call(pid, {:subtraction, a, b})
   end
 
   def multiply(pid, a, b) do
-    GenServer.call(pid, {:multiply, a, b})
+    GenServer.call(pid, {:multiplication, a, b})
   end
 
   def divide(pid, a, b) do
-    GenServer.call(pid, {:divide, a, b})
+    GenServer.call(pid, {:division, a, b})
   end
 
   def get_history(pid) do
@@ -45,24 +45,9 @@ defmodule AbacusServer do
     {:ok, history}
   end
 
-  def handle_call({:add, a, b} = message, _, history) do
-    result = Abacus.addition(a, b)
-    {:reply, result, store_history(message, result, history)}
-  end
-
-  def handle_call({:subtract, a, b} = message, _, history) do
-    result = Abacus.subtraction(a, b)
-    {:reply, result, store_history(message, result, history)}
-  end
-
-  def handle_call({:multiply, a, b} = message, _, history) do
-    result = Abacus.multiplication(a, b)
-    {:reply, result, store_history(message, result, history)}
-  end
-
-  def handle_call({:divide, a, b} = message, _, history) do
+  def handle_call({operation, a, b} = message, _, history) do
     result = try do
-      Abacus.division(a, b)
+      apply(Abacus, operation, [ a, b ])
     rescue
       _ -> :error
     end
