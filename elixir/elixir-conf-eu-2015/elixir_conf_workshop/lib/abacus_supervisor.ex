@@ -12,8 +12,6 @@ defmodule AbacusSupervisor do
   # Supervisor API.
 
   def init(_args) do
-    import Supervisor.Spec
-
     supervise([], strategy: :one_for_one)
   end
 end
