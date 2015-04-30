@@ -369,6 +369,11 @@ reliable and distributed systems.
     - Ruby: https://github.com/mojombo/bertrpc
     - Python: https://pypi.python.org/pypi/bert/1.0.0
 
+** ExProf
+
+- *Elixir* code profiler available in `hex.pm`.
+  - [[../samples/slow_reverse][Example use case and usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
