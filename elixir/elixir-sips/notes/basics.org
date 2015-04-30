@@ -378,3 +378,22 @@ exception, rather than returning an error.
       yourself you should provide both methods, and that one with the
       bang should be built on top of previous one, with adding the
       exception only.
+
+** Monitors and Links
+
+- *Monitor* is a unidirectional bound between two processes.
+  - If an observed process dies, observer receives a message:
+    - `{:DOWN, reference, type, pid, reason}`
+  - You can `demonitor` a process, when you've monitored it at the
+    first place.
+  - `Process.monitor/1`
+  - `Process.demonitor/1`
+- *Link* is a bidirectional bound between two processes. If any of
+  processes will die, that information will propagate to the second
+  one, which will cause an abnormal exit there as well (or a message
+  if process is *trapping exits*).
+  - When *exits are trapped* we will receive a message:
+    - `{:EXIT, pid, reason}`
+  - `Process.link/1`
+  - `Process.unlink/1` (this is bidirectional as well).
+  - `Process.flag(:trap_exit, true)`
