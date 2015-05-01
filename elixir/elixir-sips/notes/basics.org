@@ -397,3 +397,24 @@ exception, rather than returning an error.
   - `Process.link/1`
   - `Process.unlink/1` (this is bidirectional as well).
   - `Process.flag(:trap_exit, true)`
+
+** Set
+
+- Set module implements mathematical concept of *set*.
+- By default *Elixir* implements a `HashSet`.
+  - `set = HashSet.new`
+  - `set = Set.put(set, 1)`
+  - `letters = ~w(a b c d e f g h i j k l m n o p q r s t u v w x y z)`
+  - `vowels = ~w(a e i o u)`
+  - `letterset = for letter <- letters, into: HashSet.new, do: letter`
+  - `vowelset = for vowel <- vowels, into: HashSet.new, do: vowel`
+  - `consonantset = Set.difference(letterset, vowelset)`
+  - `Set.size(consonantset)`
+  - `Set.subset?(vowelset, letterset)`
+  - `Set.disjoint?(vowelset, letterset)`
+  - `Set.member?(consonantset, "a")`
+  - `Set.member?(vowelset, "a")`
+  - `appleset = for letter <- ~w(a p p l e), into: HashSet.new, do: letter`
+  - `Set.intersection(appleset, vowelset)`
+  - `Set.to_list(appleset)`
+  - `Set.union(appleset, vowelset)`
