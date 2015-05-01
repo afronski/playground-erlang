@@ -374,6 +374,25 @@ reliable and distributed systems.
 - *Elixir* code profiler available in `hex.pm`.
   - [[../samples/slow_reverse][Example use case and usage]]
 
+** MultiDef
+
+- Library for less-verbose way to define multiple function clauses.
+  - `https://github.com/pragdave/mdef`
+  - Example:
+    ```
+    defmodule Play do
+      import MultiDef
+
+      mdef number do
+        0 -> :zero
+        1 -> :one
+        2 -> :two
+        n when n > 2 and is_number(n) -> :noclue
+        1, 2 -> {number(1), number(2)}
+      end
+    end
+    ```
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
