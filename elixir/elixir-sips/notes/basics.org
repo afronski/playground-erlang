@@ -418,3 +418,23 @@ exception, rather than returning an error.
   - `Set.intersection(appleset, vowelset)`
   - `Set.to_list(appleset)`
   - `Set.union(appleset, vowelset)`
+
+** Standard pipes in Elixir
+
+- Example:
+  ```
+  defmodule Piper do
+    def loop do
+      case IO.read(:stdio, :line) do
+        :eof -> :ok
+        {:error, reason} -> IO.puts "Error: #{reason}"
+        data ->
+          upcased = String.upcase(data)
+          IO.puts(:stdio, upcased)
+          loop
+      end
+    end
+  end
+
+  Piper.loop
+  ```
