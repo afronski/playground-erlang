@@ -438,3 +438,13 @@ exception, rather than returning an error.
 
   Piper.loop
   ```
+
+** escript
+
+- Script which can be executed on any machine that has *Erlang VM*
+  installed.
+  - `mix escript.build`
+  - *NOTE*: Everything that varies per user basis should be provided
+    by system environment variables, because everything is bundled
+    inside the `escript` executable, event the configuration file.
+  - [[../samples/everyoneapi_cli][Example usage]]
