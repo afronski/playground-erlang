@@ -245,6 +245,18 @@ reliable and distributed systems.
   - It has also persistent version called *DETS*
     (*Disk Erlang Term Storage*).
   - [[../samples/ets_playground][Example use case for both]]
+ 
+*** inet
+
+- Basic *TCP* / *IP* implementations in the *Erlang* standard library. 
+  - `inet:getaddr("google.com", inet).`
+  - `rr("/opt/erlang/17.4/lib/kernel-3.1/include/inet.hrl").`
+  - `{ok, Ent=#hostent{}} = inet:gethostbyname("google.com").`
+  - `inet:gethostbyaddr({192,30,252,154}).`
+  - `inet:getifaddrs().`
+  - `inet:parse_ipv4_address("127.0.0.1").`
+  - `inet:getaddr("google.com", inet6).`
+  - `inet:parse_address("2001:4860:4860::8888").`
 
 ** Hex
 
