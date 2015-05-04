@@ -459,3 +459,14 @@ exception, rather than returning an error.
     - `s(Module.function)`
   - `Kernel.Typespec.beam_specs(Module)` gets all typespecs defined in a given
     module.
+
+** Dialyzer
+
+- Static analysis tool for *Erlang* programs.
+  - It uses type annotations, finds dead code and other discrepancies.
+  - In *Elixir* we need to run *Dialyzer* against our *BEAM* files.
+- At first we need to build *PLT*:
+  - `dialyzer --build_plt --apps erts /usr/lib/elixir/bin/../lib/elixir/ebin`.
+- In order to run it against *BEAM* files we need to execute:
+  - `dialyzer /path/to/_build/ebin/directory`
+- [[../samples/dialyzer_playground][Example usage]]
