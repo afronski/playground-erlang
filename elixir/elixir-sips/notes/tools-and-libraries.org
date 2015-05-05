@@ -414,6 +414,23 @@ reliable and distributed systems.
       end
     end
     ```
+** Benchmarks
+
+***  Benchfella
+
+- Benchmarking tool that includes graph output.
+  - *Benchfella* runs files which ends with `*_bench.exs`.
+  - Then in module include: `use Benchfella`
+    - And you have access to all functions.
+      - Example:
+        ```
+        bench "Meaningful name" do
+          # Benchmark source code.
+        end
+        ```
+  - Running benchmark.
+    - `elixir -pa /path/to/ebin/ -S mix bench`
+    - Besides results in `CLI` you have `HTML` output.
 
 ** Deprecated / Abandoned Libraries
 
