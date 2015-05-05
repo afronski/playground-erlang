@@ -416,7 +416,7 @@ reliable and distributed systems.
     ```
 ** Benchmarks
 
-***  Benchfella
+*** Benchfella
 
 - Benchmarking tool that includes graph output.
   - *Benchfella* runs files which ends with `*_bench.exs`.
@@ -431,6 +431,13 @@ reliable and distributed systems.
   - Running benchmark.
     - `elixir -pa /path/to/ebin/ -S mix bench`
     - Besides results in `CLI` you have `HTML` output.
+
+*** Benchwarmer
+
+- Small tool for doing really quick benchmarks.
+  - Zero ceremony!
+  - Just add it as a dependency and:
+    - `Benchwarmer.benchmark([ fn() -> if true, do: true end ])`
 
 ** Deprecated / Abandoned Libraries
 
