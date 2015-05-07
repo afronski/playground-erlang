@@ -447,6 +447,12 @@ reliable and distributed systems.
   - Just add it as a dependency and:
     - `Benchwarmer.benchmark([ fn() -> if true, do: true end ])`
 
+** Mailman
+
+- Sending emails from *Elixir*.
+  - [[../samples/mailman_playground][Sample project]]
+  - *Note*: you should use the Github version, instead of `hex.pm`.
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
