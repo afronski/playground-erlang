@@ -279,6 +279,14 @@ reliable and distributed systems.
     - `Hex.API.get_package("exactor")`
     - `Hex.API.get_release("exactor", "0.3.0")`
 
+*** `hexdocs` on hex.pm 
+
+- You need to authenticate with `hex.pm`, if you pushed a first package you
+  already are.
+  - You should declare `:ex_doc` and `:markdown` dependencies to use only in the
+    `:docs` environment.
+  - Then compile and push the docs by `MIX_ENV=docs mix hex.docs`.
+
 ** Ecto
 
 - https://github.com/elixir-lang/ecto
