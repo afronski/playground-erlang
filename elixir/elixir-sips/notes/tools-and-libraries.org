@@ -158,6 +158,45 @@
   - `pg2` expands to *Process Group*.
   - [[../samples/string_processes][Example use case]]
 
+*** egd
+
+- Erlang Standard Graphics library.
+  - Example:
+    ```
+    defmodule Image do
+      @width 800
+      @height 800
+      @num_shades 50
+      @colors for r <- 0..@num_shades,
+                  g <- 0..@num_shades,
+                  b <- 0..@num_shades,
+                  do: {r, g, b}
+
+      @pixel_positions for x <- 0..@width,
+                           y <- 0..@height,
+                           do: [x, y]
+      @filename '/tmp/test.png`
+
+      def run do
+        image = :egd.create(@width, @height)
+        for [x, y] <- @pixel_positions do
+          :egd.filledRectangle(
+            image, {x, y}, {x, y}, 
+            :egd.color(Enum.at(@colors, x + y))
+          )
+        end
+        :egd.save(:egd.render(image, :png), @filename)
+      end
+
+      def display do
+        System.cmd("open", [ @filename ])
+      end
+    end
+
+    Image.run
+    Image.display
+    ```
+
 ** OTP
 
 *OTP* is a *Open Telecom Platform*. Set of libraries for building
