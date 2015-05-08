@@ -453,6 +453,12 @@ reliable and distributed systems.
   - [[../samples/mailman_playground][Sample project]]
   - *Note*: you should use the Github version, instead of `hex.pm`.
 
+** Arduino with Elixir
+
+- Nice example for communicating from Elixir to Arduino C code via *serial port*
+  and simple text-based protocol.
+  - https://github.com/knewter/erlang-serial
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
