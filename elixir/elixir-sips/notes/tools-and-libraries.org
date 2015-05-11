@@ -498,6 +498,13 @@ reliable and distributed systems.
   and simple text-based protocol.
   - https://github.com/knewter/erlang-serial
 
+** erlang_js
+
+- Interacting with JavaScript engine called SpiderMonkey from Erlang a trivial
+  thing.
+  - [[../samples/erlang_js_playground][Example use case]]
+  - Another example: HashNuke/coffee_rotor
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
