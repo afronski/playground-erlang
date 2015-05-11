@@ -1,0 +1,2 @@
+defmodule ErlangJsPlayground do
+end
