@@ -460,6 +460,28 @@ exception, rather than returning an error.
   - `Kernel.Typespec.beam_specs(Module)` gets all typespecs defined in a given
     module.
 
+** Introspection
+
+- `:erlang.process_info/1`
+  - You can investigate links, status, initial call.
+  - You can see reductions, group leader, is it trapping exits.
+  - By default: *it returns all message in the mailbox*.
+    - Beware! You can increase RAM by that.
+    - The same thing applies to *process dictionary*.
+  - You can use `:erlang.process_info/2` to narrow down amount of certain
+    properties.
+- `:c.regs()` returns list of registered procs and ports on actual node.
+- `:c.i()` return list of processes on actual node.
+- `:erlang.process_flag(:save_calls, 30)`
+  - It saves given amount of calls for that process.
+  - You can obtain that by `:erlang.process_info(pid, :last_calls)`.
+- `:erlang.process_display(pid, :backtrace)`
+  - It returns actual backtrace for given process.
+- `:erlang.suspend_process(pid)`
+  - It suspend given process, it receives messages normally but it won't do any
+    operation (reduction counter will not increase during suspend). You can
+    resume it by `:erlang.resume_process(pid)`.
+
 ** Dialyzer
 
 - Static analysis tool for *Erlang* programs.
