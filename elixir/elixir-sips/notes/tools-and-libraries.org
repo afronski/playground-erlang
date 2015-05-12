@@ -505,6 +505,11 @@ reliable and distributed systems.
   - [[../samples/erlang_js_playground][Example use case]]
   - Another example: HashNuke/coffee_rotor
 
+** Porcelain
+
+- Nice library for interacting with `ports`.
+  - [[../samples/porcelain_playground][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
