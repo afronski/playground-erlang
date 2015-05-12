@@ -510,6 +510,11 @@ reliable and distributed systems.
 - Nice library for interacting with `ports`.
   - [[../samples/porcelain_playground][Example usage]]
 
+** Socket
+
+- Nice abstraction around `gen_tcp`, `gen_udp`, `gen_sctp` and `ssl`.
+  - [[../samples/socket_playground][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
