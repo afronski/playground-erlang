@@ -515,6 +515,12 @@ reliable and distributed systems.
 - Nice abstraction around `gen_tcp`, `gen_udp`, `gen_sctp` and `ssl`.
   - [[../samples/socket_playground][Example usage]]
 
+** webassembly
+
+- Generating markup from blocks of *Elixir* code, based on `markaby` from
+  *Ruby*. It provides a nice DSL around that.
+  - [[../samples/webassembly_playground/][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
