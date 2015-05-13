@@ -521,6 +521,12 @@ reliable and distributed systems.
   *Ruby*. It provides a nice DSL around that.
   - [[../samples/webassembly_playground/][Example usage]]
 
+** OAuth2
+
+- Integrating Phoenix application with any OAuth2 based API thanks to Sonny
+  Scroggin library called `oauth2`.
+  - [[../samples/oauth2_example][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
