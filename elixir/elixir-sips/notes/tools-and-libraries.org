@@ -527,6 +527,22 @@ reliable and distributed systems.
   Scroggin library called `oauth2`.
   - [[../samples/oauth2_example][Example usage]]
 
+** exrm
+
+- Release management for *Elixir*.
+  - Add dependency: `{:exrm, "~> 0.15.3"}`
+  - Add all applications to the application list in `mix.exs`.
+    - Without that, application won't start.
+  - New mix tasks:
+    - `mix release`
+    - `mix release.clean`
+    - `mix release.plugins`
+  - Add your router to the supervision tree which will start automatically.
+  - Build a release: `mix release`
+  - Install release: `./rel/<name>/bin/<name>`
+    - It is a standard release facility.
+    - Remember to pass all environment variables when starting.
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
