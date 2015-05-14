@@ -543,6 +543,11 @@ reliable and distributed systems.
     - It is a standard release facility.
     - Remember to pass all environment variables when starting.
 
+** epcap
+
+- *Erlang* wrapper library for `libpcap` for network sniffing and analysis.
+  - [[../samples/network_analysis][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak

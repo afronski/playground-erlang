@@ -1,0 +1,2 @@
+%{"epcap": {:git, "git://github.com/msantos/epcap.git", "d90afda3fac9ccb4dd2e0f0e5c82ecafca0adc85", []},
+  "pkt": {:git, "https://github.com/msantos/pkt.git", "b955d6344809cf50ca0ebbedc8ff7a2f73470651", [ref: "master"]}}
