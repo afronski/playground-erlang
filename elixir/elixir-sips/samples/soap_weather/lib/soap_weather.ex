@@ -1,0 +1,2 @@
+defmodule SoapWeather do
+end

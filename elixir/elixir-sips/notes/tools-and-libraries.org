@@ -553,6 +553,12 @@ reliable and distributed systems.
 - Library for interacting with Amazon's APIs from *Erlang* and *Elixir*.
   - [[../samples/erlcloud_playground][Example usage]]
 
+** detergentex
+
+- Library for interacting with SOAP services, based on an *Erlang* library
+  called `:detergent`.
+  - [[../samples/soap_weather][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak

@@ -1,0 +1,3 @@
+%{"detergent": {:hex, :detergent, "0.3.0"},
+  "detergentex": {:hex, :detergentex, "0.0.3"},
+  "erlsom": {:git, "git://github.com/willemdj/erlsom.git", "5dba7819ef99ba84eeb43c946dbe7f16792e6086", []}}
