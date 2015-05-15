@@ -548,6 +548,11 @@ reliable and distributed systems.
 - *Erlang* wrapper library for `libpcap` for network sniffing and analysis.
   - [[../samples/network_analysis][Example usage]]
 
+** erlcloud
+
+- Library for interacting with Amazon's APIs from *Erlang* and *Elixir*.
+  - [[../samples/erlcloud_playground][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak

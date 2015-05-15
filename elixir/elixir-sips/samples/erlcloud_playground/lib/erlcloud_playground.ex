@@ -1,0 +1,2 @@
+defmodule ErlcloudPlayground do
+end
