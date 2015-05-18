@@ -492,3 +492,15 @@ exception, rather than returning an error.
 - In order to run it against *BEAM* files we need to execute:
   - `dialyzer /path/to/_build/ebin/directory`
 - [[../samples/dialyzer_playground][Example usage]]
+
+** Randomness on Erlang VM
+
+- *Erlang's* pseudo-random number generator keeps state in the *process dictionary*.
+  - So basically you should seed every single process in order to receive true
+    randomness, otherwise you will have a repeatable state every single call
+    from `:random` module.
+  - You should be aware of fact that also `start/1` and `init/1` runs in a
+    different contexts. Start is invoked in the process above, and then it
+    spawns new process, the actual `gen_*` behavior, only the `init/1` is
+    invoked inside the actually spawned process, so there is a place for
+    `random:seed/1`.
