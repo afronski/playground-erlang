@@ -1,0 +1,10 @@
+%{"active": {:git, "https://github.com/proger/active", "974e6e748695c819128d51a0ca3b59f349d447af", [ref: "HEAD"]},
+  "erldocker": {:git, "git://github.com/proger/erldocker.git", "183e525ad7ae8da94ba0839a6d7c4b2d84ba9e37", []},
+  "erlfsmon": {:git, "git://github.com/proger/erlfsmon", "12759ab5e531d89768e14078f130daf9e5969749", [ref: "HEAD"]},
+  "erlsh": {:git, "https://github.com/proger/erlsh", "a476e9291e27b2bf2712a7f7b6aaaef595403d15", [ref: "HEAD"]},
+  "fn": {:git, "https://github.com/reiddraper/fn", "1e8f3f43e5fa6e5e68eb19184fa60d8da5de99d0", [tag: "0.3.0"]},
+  "goldrush": {:git, "git://github.com/DeadZen/goldrush.git", "879c69874a555b2c13498aa4a3da6f6bbbb6a031", [tag: "879c69874a"]},
+  "hackney": {:git, "https://github.com/benoitc/hackney", "5b0f7eb949ebebd6fabfbc4e08a7b7231850606a", [tag: "0.4.4"]},
+  "jsx": {:git, "https://github.com/talentdeficit/jsx", "e50af6e109cb03bd26acf715cbc77de746507d1d", [tag: "v1.4.3"]},
+  "lager": {:git, "https://github.com/basho/lager", "169cffd94759e99e2e8870b125861a91e3c1482a", [tag: "2.0.0"]},
+  "mimetypes": {:git, "https://github.com/spawngrid/mimetypes.git", "47d37a977a7d633199822bf6b08353007483d00f", [ref: "master"]}}

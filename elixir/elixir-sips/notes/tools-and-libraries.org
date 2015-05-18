@@ -559,6 +559,11 @@ reliable and distributed systems.
   called `:detergent`.
   - [[../samples/soap_weather][Example usage]]
 
+** erldocker
+
+- Managing `docker` from the *Erlang* / *Elixir* programs.
+  - [[../samples/docker_playground][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
