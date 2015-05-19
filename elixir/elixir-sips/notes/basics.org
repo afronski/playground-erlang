@@ -324,6 +324,8 @@ exception, rather than returning an error.
 
 - Custom Tasks.
   - [[../samples/custom_mix][Custom Mix tasks example]]
+  - How to start `iex` session with e.g. Phoenix?
+    - `iex -S mix phoenix.server`
 
 ** Protocols
 
