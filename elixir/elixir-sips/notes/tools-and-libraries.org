@@ -222,6 +222,10 @@ reliable and distributed systems.
 - Generic behavior for managing, observing and restarting other
   processes.
   - [[../samples/OTP/supervised_list_server][Example implementation with tests]]
+  - When you are spawning multiple, identical and temporary processes it can be
+    beneficial to use `:simple_one_for_one` supervision strategy.
+    - It is ideal to start multiple processes, with the same definition,
+      dynamically - if you don't know *a prori* how many of them you will have.
 
 *** gen_tcp
 
