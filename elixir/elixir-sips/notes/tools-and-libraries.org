@@ -564,6 +564,16 @@ reliable and distributed systems.
 - Managing `docker` from the *Erlang* / *Elixir* programs.
   - [[../samples/docker_playground][Example usage]]
 
+** good_times
+
+- An *Elixir* library for specifying relative dates and times.
+  - `import GoodTimes`
+    - `now`
+    - `10 |> seconds_from_now`
+    - `60 |> seconds_ago`
+    - `10 |> minutes_from_now` 
+  - Very nice written, small and clean library.
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
