@@ -546,6 +546,15 @@ reliable and distributed systems.
   - Install release: `./rel/<name>/bin/<name>`
     - It is a standard release facility.
     - Remember to pass all environment variables when starting.
+  - Release upgrades:
+    - Add `:exrm` to the dependencies.
+    - `mix release`
+    - Install it and use.
+    - Add new features, increment version number.
+    - `mix release`
+    - Create releases directory with version for your new release.
+    - Copy new release to a given directory.
+    - `./bin/ping_upgrade upgrade "0.0.2"`
 
 ** epcap
 
