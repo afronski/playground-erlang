@@ -506,3 +506,9 @@ exception, rather than returning an error.
     spawns new process, the actual `gen_*` behavior, only the `init/1` is
     invoked inside the actually spawned process, so there is a place for
     `random:seed/1`.
+
+** Contributing
+
+- Projects from *elixir-lang* organization has labels for starters
+  'Level:Starter'.
+- Create a well named feature branch (with issue number). 
