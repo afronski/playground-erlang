@@ -1,0 +1,45 @@
+Word Positions for Doc 123 Version 1.0.0
+Page: 1 121 lines
+Column: 1
+Line: 1 1412 1512 2 words
+	2288 2920 WHEN
+	2964 3924 IN
+Line: 2 1760 1860 4 words
+	1804 3168 THE
+	3212 3400 COURSE
+	3448 4104 OF
+	4144 4400 HUMAN
+Line: 3 1936 2036 1 words
+	2580 3620 EVENTS
+Column: 2
+Line: 1 1408 1544 7 words
+	5348 5456 It
+	5550 6052 becomes
+	6152 6764 necessary
+	6860 7128 for
+	7224 7940 one
+	8040 8220 people
+	8324 8792 to
+Line: 2 1580 1716 11 words
+	5204 5656 dissolve
+	5701 5992 the
+	6036 6216 political
+	6260 6776 bands
+	6828 7108 which
+	7160 7248 have
+	7296 7520 connected
+	7564 7744 them
+	7796 8264 with
+	8308 8404 another
+	8456 8796 and
+Line: 3 1756 1892 10 words
+	5204 5480 to
+	5532 6028 assume
+	6080 6204 among
+	6252 6948 the
+	6996 7156 powers
+	7220 7512 of
+	7568 7896 the
+	7940 8120 earth
+	8176 8644 the
+	8694 8788 separate
