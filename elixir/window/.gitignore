@@ -1,0 +1,10 @@
+# Build results and dependencies: 
+/_build
+/deps
+
+# Logs and crash dumps:
+erl_crash.dump
+logs/
+
+# Binaries:
+*.ez
