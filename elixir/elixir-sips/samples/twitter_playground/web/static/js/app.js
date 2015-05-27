@@ -1,10 +1,25 @@
-import {Socket} from "phoenix"
+import {Socket} from "phoenix";
 
-// let socket = new Socket("/ws")
-// socket.join("topic:subtopic", {}, chan => {
-// })
+class App {
+    static init() {
+        let socket = new Socket("/ws");
 
-let App = {
+        socket.connect();
+        socket.join("tweets", { query: "apple" }).receive("ok", channel => {
+            console.log("Channel:", channel);
+
+            channel.on("new_tweet", message => {
+                console.info("Message:", message);
+
+                let li = document.createElement("li");
+
+                let text = document.createTextNode(message.text);
+                li.appendChild(text);
+
+                document.querySelector("#tweets").appendChild(li);
+            });
+        });
+    }
 }
 
-export default App
+document.addEventListener("DOMContentLoaded", () => App.init());

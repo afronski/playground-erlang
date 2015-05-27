@@ -4,6 +4,13 @@ defmodule TwitterPlayground do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    ExTwitter.configure(
+      consumer_key: System.get_env("TWITTER_CONSUMER_KEY"),
+      consumer_secret: System.get_env("TWITTER_CONSUMER_SECRET"),
+      access_token: System.get_env("TWITTER_ACCESS_TOKEN"),
+      access_token_secret: System.get_env("TWITTER_ACCESS_SECRET")
+    )
+
     children = [
       supervisor(TwitterPlayground.Endpoint, []),
     ]

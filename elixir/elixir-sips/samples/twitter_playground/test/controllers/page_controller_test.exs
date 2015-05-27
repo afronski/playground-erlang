@@ -3,6 +3,6 @@ defmodule TwitterPlayground.PageControllerTest do
 
   test "GET /" do
     conn = get conn(), "/"
-    assert conn.resp_body =~ "Welcome to Phoenix!"
+    assert conn.resp_body =~ "Hello Phoenix!"
   end
 end
