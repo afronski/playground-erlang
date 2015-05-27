@@ -587,6 +587,11 @@ reliable and distributed systems.
     - `10 |> minutes_from_now` 
   - Very nice written, small and clean library.
 
+** ExTwitter
+
+- Library written in *Elixir* for interacting with Twitter API.
+  - [[../samples/twitter_playground][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
