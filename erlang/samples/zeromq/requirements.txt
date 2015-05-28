@@ -1,0 +1,6 @@
+argparse==1.2.1
+pyzmq==14.6.0
+stevedore==0.15
+virtualenv-clone==0.2.5
+virtualenvwrapper==4.3
+zmq==0.0.0
