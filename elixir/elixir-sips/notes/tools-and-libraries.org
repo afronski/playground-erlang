@@ -202,6 +202,31 @@
     Image.display
     ```
 
+*** calendar
+
+- Erlang dates are represented as 3 element tuple:
+  - `date = {2015, 03, 01}`
+  - `:calendar.date_to_gregorian_days(date)`
+- Erlang times are represented as 3 element tuple:
+  - `time = {0, 0, 6}`
+- Date-Time is represented as product of these two:
+  - `datetime = {date, time}`
+  - `:calendar.datetime_to_gregorian_seconds(datetime)`
+  - `:calendar.day_of_the_week(date)`
+  - `:calendar.is_leap_year(2015)`
+  - `:calendar.iso_week_number(date)`
+  - `:calendar.last_day_of_the_month(2014, 2)`
+  - `local = :calendar.local_time`
+  - `:calendar.local_time_to_universal_time_dst(local)`
+  - `:erlang.now`
+  - `:calendar.now_to_local_time(:erlang.now)`
+  - `:calendar.seconds_to_daytime(1_000_000)`
+  - `:calendar.time_difference(time1, time2)`
+  - `:calendar.time_to_seconds(time)`
+  - `utime = :calendar.universal_time`
+  - `:calendar.universal_time_to_local_time(utime)`
+  - `:calendar.valid_date(2012, 02, 29)`
+
 ** OTP
 
 *OTP* is a *Open Telecom Platform*. Set of libraries for building
