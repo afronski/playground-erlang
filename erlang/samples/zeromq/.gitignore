@@ -1,8 +1,7 @@
-bin/
-include/
-lib/
+python/bin/
+python/include/
+python/lib/
 
-_build/
-*.beam
-
-*.lock
+erlang/_build/
+erlang/ebin/*.beam
+erlang/rebar.lock
