@@ -16,12 +16,12 @@ def init_socket(ctx):
     socket = ctx.socket(zmq.REP)
     socket.bind("tcp://*:5555")
 
-    print("Listening on port 5555")
+    print "Listening on port 5555"
 
     return socket
 
 def handle_msg(msg, socket):
-    print("Got %s" % msg)
+    print "Got %s" % msg
 
     try:
         socket.send("+%s" % format_json(msg))
