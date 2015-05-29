@@ -150,6 +150,11 @@
   - You can connect to it from the any authorized *Erlang* shell.
   - Interacting with *Elixir* code needs to be done in particular way,
     but it is pleasant and possible.
+- Client API:
+  - `:application.ensure_all_started(:ssh)`
+  - `{:ok, conn} = :ssh.connect('localhost', 22, [user: 'sips', password: 'changeme', silently_accept_hosts: true])` 
+  - `{:ok, chan_id} = :ssh_connection.session_channel(conn, :infinity)`
+  - `:success = :ssh_connection.exec(conn, chan_id, 'touch /tmp/elixirssh', :infinity)` 
 
 *** pg2
 
