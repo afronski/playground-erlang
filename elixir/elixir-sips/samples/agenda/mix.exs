@@ -12,10 +12,13 @@ defmodule Agenda.Mixfile do
 
   def application do
     [applications: [:logger],
+     registered: [Agenda.Worker],
      mod: {Agenda, []}]
   end
 
   defp deps do
-    []
+    [
+        {:good_times, "~> 1.0.0"}
+    ]
   end
 end

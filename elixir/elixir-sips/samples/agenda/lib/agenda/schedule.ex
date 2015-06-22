@@ -21,4 +21,9 @@ defmodule Agenda.Schedule do
         Enum.any?(schedule.day_of_week, fn(dow) -> dow == :calendar.day_of_the_week(date) end)
     ] |> Enum.all?
   end
+
+  @spec execute_command(Agent.Schedule) :: any
+  def execute_command(%Agenda.Schedule{command: command}) do
+    spawn(fn() -> Code.eval_quoted(command) end)
+  end
 end
