@@ -512,3 +512,26 @@ exception, rather than returning an error.
 - Projects from *elixir-lang* organization has labels for starters
   'Level:Starter'.
 - Create a well named feature branch (with issue number). 
+
+** Erlang 18 and Time
+
+- Because of problems related `:erlang.now` since the 18th release is
+  recommended to use different functions.
+  - *You should stop using it now, if you can use 18.0 in your system*.
+  - System time - `erlang.system_time`
+  - System time (compatible format) - `:erlang.timestamp`
+  - For time difference - Take twice `:erlang.monotonic_time` and calculate the
+    difference between.
+  - Converting time units - `:erlang.convert_time_unit(1, :seconds, :native)`
+    - For most machines it returns 10e9, which means that nanoseconds are
+      default, but you shouldn't do any assumptions regarding that.
+  - Ordering - `erlang.unique_integer` (with options like
+    `[:monotonic, :positive]`).
+    - It has similar constraints as previous implementation - so it is limited
+      to one node.
+    - You can use also a tuple, in order to have it unique across multiple
+      machines:
+      - `{:erlang.monotonic_time, :erlang.unique_integer([:monotonic])}`
+  - `:random.seed(:erlang.monotonic_time, :erlang.unique_integer, :erlang.monotonic_time)`
+- There are examples how to handle fallback properly in file:
+  `erts/example/time_compat.erl`.
