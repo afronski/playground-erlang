@@ -622,6 +622,20 @@ reliable and distributed systems.
 - Library written in *Elixir* for interacting with Twitter API.
   - [[../samples/twitter_playground][Example usage]]
 
+** SDL
+
+- Wrapper written in *Elixir* for interacting with SDL API.
+  - [[../samples/sdl_playground][Example usage]]
+  - On ArchLinux I installed additionally following packages:
+    - `sdl2`
+    - `sdl2_image`
+
+** Boltun
+
+- Package which allows to use *PostgreSQL* **publish-subscribe** mechanism called
+  *Listen-Notify*.
+  - [[../samples/boltun_playground][Example usage]]
+
 ** Deprecated / Abandoned Libraries
 
 *** Elixiak
