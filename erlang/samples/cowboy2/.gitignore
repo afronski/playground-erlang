@@ -1,0 +1,5 @@
+# Dependencies and binaries:
+_build/
+
+# Lock files:
+*.lock
