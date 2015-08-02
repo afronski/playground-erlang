@@ -1,0 +1,1 @@
+%{"czmq": {:git, "git://github.com/gar1t/erlang-czmq.git", "ad6db46d73c6894d703fbf9dd22fd9a8fe6392a6", []}}
