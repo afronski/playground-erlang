@@ -1,13 +1,13 @@
-# App artifacts
+# App artifacts:
 /_build
 /db
 /deps
 /*.ez
 
-# Generate on crash by the VM
+# Generate on crash by the VM:
 erl_crash.dump
 
-# Static artifacts
+# Static artifacts:
 /node_modules
 
 # Since we are building assets from web/static,
