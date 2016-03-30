@@ -1,0 +1,83 @@
+* Notes
+** Introduction - On Running Software
+   - "Let it crash" (also called mildly "let it fail") - it turns out that 131
+     out of 132 bugs are transient bugs (they’re non-deterministic and go away
+     when you look at them, and trying again may solve the problem entirely),
+     according to *Jim Gray* in *Why Do Computers Stop and What Can Be Done
+     About It*?
+   - Interesting analogy to immunology system (Erlang) and extreme care about
+     outside hygiene and do not letting germs get into (other languages). Both
+     are extremely important, but only good immune system is a long term
+     solution for varying and - more important - evolving environment.
+   - More interesting part is when you can diagnose running system, by observing
+     it (introspection and tracing) and be a "doctor" in the run-time.
+** Part I - Writing Applications
+*** How to dive into a Code Base?
+    - Distinction between *library* and *regular* applications. But they're
+      sharing the same OTP structure. Good starting point is either
+      *src/<AppName>.app.src* or *ebin/<AppName>.app* (generated or
+      handcrafted).
+    - Potential entry point will be either wrapper module with the same name or
+      *application* behavior for *regular application*.
+    - Releases are not different - it is mostly a packaged version of your app
+      generated with use of `systools` or `reltool` (sometimes with something
+      more modern like `relx`).
+*** Building Open Source Erlang Software
+    - *Mean Times Between Failures* (MTBF) of systems handling transient bugs
+      being better by a *factor of 4* when doing this.
+    - One very important part of Erlang supervisors and their supervision trees
+      is that their start phases are synchronous. Each OTP process has the
+      potential to prevent its siblings and cousins from booting. If the process
+      dies, it’s retried again, and again, until it works, or fails too often.
+    - No matter what, a sequence of failures is not a death sentence for the
+      node. Once a system has been divided into various OTP applications, it
+      becomes possible to choose which applications are vital or not to the
+      node. Each OTP application can be started in 3 ways: *temporary* (even
+      critical failure causes no harm for node), transient (normal exit causes
+      no harm to node), permanent (any exit takes down the node as well), either
+      by doing it manually in `application:start(Name, Type)`, or in the
+      configuration file for your release.
+*** Planning for Overload
+    - It is often called - how to you avoid work when you are over of your
+      capabilities. In Erlang systems, node can be killed by exhausting memory,
+      because of built-up message queues. Often investigating true bottleneck is
+      more expensive that it look at the first sight. Even if you will increase
+      pipe radius, and build bigger pipelines, there is a lot of thing out of
+      your control, which are have "smaller radius" and won't accept increased
+      flow.
+    - You can either do *load-shedding* (drop messages on the floor) or
+      introduce *back-pressure* (do not accept more messages and inform producer
+      about that fact, deliberately slow down of your users, providing to them a
+      bad UX, but you know - availability is more important).
+      - In case of *back-pressure* it loves to creep out from the core of your
+        system down through the edges, especially in case when you have a
+        sequential or lock-envy operation. Because it means that other
+        asynchronous operations can built up heavily when those sequential one
+        is serving previous requests. And one more thing - waiting for unbounded
+        time (aka no timeouts) is silly. Why not to wait 30 years? Ah this is
+        silly, and how come infinity is not? ;)
+        - Pat Helland, *Idempotence is not a medical condition* (2012)
+        - *Safety Valve* or *circuit breaker* is also a very nice and interesting
+          pattern for that. It is also very important to communicate
+          *back-pressure* mechanism violation clearly and least painfully for the
+          end user as you can.
+      - Another strategy is to drop traffic. Randomly, with priorities, batching
+        together similar things etc. You name it. The main purpose is to drop
+        the messages in order to live and not crash. Also various data
+        structures like queue buffers, stack buffers, time-based buffers and
+        ring buffers will be helpful for you.
+        - BTW. Erlang lists are *stacks*, internally it is much more complicated
+          but from behavioral point of view - it is a stack, built on top of
+          single-linked list.
+    - Common Erlang overload issues?
+      - `error_logger` explosion - default implementation from OTP do not expect
+        a lot and big messages to be dumped on it. In really high traffic
+        systems couple minutes can cause a OOM issue. Use other
+        implementations - e.g. one delivered with `lager` library.
+      - Too eager and too fast retry can cause message queue to built-up and
+        explode the node as well. Especially when you're handling blocking and
+        locking operations (e.g. I/O - like listening on socket).
+      - Unexpected messages and building message queue app can also cause the
+        node failure.
+** Part II - Diagnosing Applications
+*** Connecting to Remote Nodes
