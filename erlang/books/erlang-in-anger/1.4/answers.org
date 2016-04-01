@@ -1,0 +1,13 @@
+* 1.4 Exercises
+** Review Questions
+*** 1. How do you know if a code base is an application? A release?
+*** 2. What differentiates an application from a library application?
+*** 3. What can be said of processes under a one_for_all scheme for supervision?
+*** 4. Why would someone use a gen_fsm behaviour over a gen_server?
+** Hands-On
+*** 1. Is this application meant to be used as a library? A standalone system?
+*** 2. What does it do?
+*** 3. Does it have any dependencies? What are they?
+*** 4. The app’s README mentions being non-deterministic. Can you prove if this is true? How?
+*** 5. Can you express the dependency chain of applications in there? Generate a diagram of them?
+*** 6. Can you add more processes to the main application than those described in the README?

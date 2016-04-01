@@ -1,0 +1,11 @@
+* 2.3 Exercises
+** Review Questions
+*** 1. Are Erlang supervision trees started depth-first? breadth-first? Synchronously or asynchronously?
+*** 2. What are the three application strategies? What do they do?
+*** 3. What are the main differences between the directory structure of an app and a release?
+*** 4. When should you use a release?
+*** 5. Give two examples of the type of state that can go in a process’ init function, and two examples of the type of state that shouldn’t go in a process’ init function
+** Hands-On
+*** 1. Extract the main application hosted in the release to make it independent, and includable in other projects.
+*** 2. Host the application somewhere (Github, Bitbucket, local server), and build a release with that application as a dependency.
+*** 3. The main application’s workers (council_member) starts a server and connects to it in its init/1 function. Can you make this connection happen outside of the init function’s? Is there a benefit to doing so in this specific case?

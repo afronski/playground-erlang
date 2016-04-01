@@ -1,0 +1,16 @@
+* 3.4 Exercises
+** Review Questions
+*** 1. Name the common sources of overload in Erlang systems
+*** 2. What are the two main classes of strategies to handle overload?
+*** 3. How can long-running operations be made safer?
+*** 4. When going synchronous, how should timeouts be chosen?
+*** 5. What is an alternative to having timeouts?
+*** 6. When would you pick a queue buffer before a stack buffer?
+** Open-ended Questions
+*** 1. What is a true bottleneck? How can you find it?
+*** 2. In an application that calls a third party API, response times vary by a lot depending on how healthy the other servers are. How could one design the system to prevent occasionally slow requests from blocking other concurrent calls to the same service?
+*** 3. What’s likely to happen to new requests to an overloaded latency-sensitive service where data has backed up in a stack buffer? What about old requests?
+*** 4. Explain how you could turn a load-shedding overload mechanism into one that can also provide back-pressure.
+*** 5. Explain how you could turn a back-pressure mechanism into a load-shedding mechanism.
+*** 6. What are the risks, for a user, when dropping or blocking a request? How can we prevent duplicate messages or missed ones?
+*** 7. What can you expect to happen to your API design if you forget to deal with overload, and suddenly need to add back-pressure or load-shedding to it?
