@@ -1,0 +1,9 @@
+* 4.5 Exercises
+** Review Questions
+*** 1. What are the 4 ways to connect to a remote node?
+*** 2. Can you connect to a node that wasn’t given a name?
+*** 3. What’s the command to go into the Job Control Mode (JCL)?
+*** 4. Which method(s) of connecting to a remote shell should you avoid for a system that outputs a lot of data to standard output?
+*** 5. What instances of remote connections shouldn’t be disconnected using ˆG?
+*** 6. What command(s) should never be used to disconnect from a session?
+*** 7. Can all of the methods mentioned support having multiple users connected onto the same Erlang node without issue?
