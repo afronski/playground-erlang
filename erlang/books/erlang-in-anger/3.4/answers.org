@@ -1,16 +1,59 @@
 * 3.4 Exercises
 ** Review Questions
-*** 1. Name the common sources of overload in Erlang systems
+*** 1. Name the common sources of overload in Erlang systems.
+    - Explosion of `error_logger` and error messages flood.
+    - Locks and blocking operations (I/O related).
+    - Unexpected (and in consequence unconsumed) messages.
 *** 2. What are the two main classes of strategies to handle overload?
+    - Dropping traffic on the floor (randomly or on some predefined manner).
+    - Applying back-pressure (or restricting input and e.g. do not accepting new
+      traffic).
 *** 3. How can long-running operations be made safer?
+    - You can transform it into asynchronous operation, which will be safer and
+      will not cause to be bottleneck for that particular process or processes
+      group.
 *** 4. When going synchronous, how should timeouts be chosen?
+    - Timer at the edge of the system will need to have a longer wait time that
+      those within, unless you plan on having operations reported as timing out
+      at the edge even though they succeeded internally.
 *** 5. What is an alternative to having timeouts?
+    - Dropping traffic, you can apply infinite timeouts (or really high ones, no
+      difference actually), but it is equal to be "blocking" and introducing one
+      bottleneck instead of previous one.
 *** 6. When would you pick a queue buffer before a stack buffer?
+    - Queue buffer is important when order of arrived messages matters, and
+      those which first arrives are most important. Also you can apply some kind
+      of prioritization (based on priority queue) there.
+    - Stack buffer is helpful when you have to accept most recent tasks and rest
+      should be either dropped or applied later anyway. Stack is a similar
+      approach to having data structure which stores only last information,
+      because everything stale is not important for us anyway.
 ** Open-ended Questions
 *** 1. What is a true bottleneck? How can you find it?
+    - It is a place in your application, source code where every other
+      operations dependent from it are waiting until the execution finishes.
 *** 2. In an application that calls a third party API, response times vary by a lot depending on how healthy the other servers are. How could one design the system to prevent occasionally slow requests from blocking other concurrent calls to the same service?
-*** 3. What’s likely to happen to new requests to an overloaded latency-sensitive service where data has backed up in a stack buffer? What about old requests?
+    - First line of securing that place will be applying timeouts and retry
+      strategies wisely.
+      - Also, you can use the *circuit breaker* pattern (or often called *safety
+        valve*).
+*** 3. What's likely to happen to new requests to an overloaded latency-sensitive service where data has backed up in a stack buffer? What about old requests?
+    - Those old requests will be backed up beneath the new ones, so until the
+      order and completeness matter everything will be fine and system with
+      caught up during calmer time.
 *** 4. Explain how you could turn a load-shedding overload mechanism into one that can also provide back-pressure.
+    - By applying limits and counters additionally to dropping load.
 *** 5. Explain how you could turn a back-pressure mechanism into a load-shedding mechanism.
+    - Instead of communicating to the upstream that you cannot accept more load,
+      you can silently drop less important messages (or all of them, above
+      certain limit if you can).
 *** 6. What are the risks, for a user, when dropping or blocking a request? How can we prevent duplicate messages or missed ones?
+    - We should apply some kind of strategy on the protocol / messaging level
+      related with introducing unique, monotonically increasing ID (if we can),
+      that will help us detect duplicated messages or those which are missing.
 *** 7. What can you expect to happen to your API design if you forget to deal with overload, and suddenly need to add back-pressure or load-shedding to it?
+    - It will feel unnatural and will be hard to use (e.g. introducing
+      artificial error codes instead of real flow), also it can introduce
+      painful consequences regarding system architecture (e.g. no real overload
+      prevention mechanism can cause significant simplification in the process
+      architecture and untangling that can be hard, if not impossible).
