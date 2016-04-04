@@ -1,13 +1,54 @@
 * 1.4 Exercises
 ** Review Questions
 *** 1. How do you know if a code base is an application? A release?
+    - Release is a group of applications combined together, usually there is
+      `apps` and `deps` directory there and configuration for release management
+      tools (like `relx`, `systools` etc.).
+    - Inside prepared single release directory there is `lib` directory with
+      prepackaged all used applications. Also there is directory structure for
+      `log`, `etc` and `www`. Prepared release is a self-contained, "deployable"
+      version of the system.
+      - In application source code is inside `src` directory, compiled modules
+        are inside `ebin` directory etc.
 *** 2. What differentiates an application from a library application?
+    - Two things:
+      - You can look into `*.app` or `*.app.src` file, if there is a `{mod,
+        {ModuleName, Args}}` tuple it is a regular application, because that's
+        how the OTP knows which module has to be started afterwards.
+      - Naming convention - if source directory contains `appname_app` module it
+        means that there is somewhere an `application` behavior implementation.
+        Which at the end means that it has to be a regular application.
 *** 3. What can be said of processes under a one_for_all scheme for supervision?
+    - All processes held underneath that particular supervisor are dependent
+      from each other, because crash of one of them causes restart of every
+      other.
 *** 4. Why would someone use a gen_fsm behaviour over a gen_server?
+    - If someone wants to use only *client-server* behavior it is okay to use
+      `gen_server`, however if someone will rewrite the state machine
+      implementation there, it is an unnecessary complication and reinventing
+      the wheel.
 ** Hands-On
 *** 1. Is this application meant to be used as a library? A standalone system?
+    - It is a system, which contains one application `council`.
 *** 2. What does it do?
+    - According to the README file, it spawns 26 different processes which are
+      communicating randomly over TCP connections.
 *** 3. Does it have any dependencies? What are they?
+    - It contains two dependencies `ferd/recon` and `uwiger/gproc`, both downloaded from Github.
+      - `recon` is a general use helper library for Erlang VM. It is a helpful
+        add-on for further maintenance.
+      - `gproc` it is an application, which represents distributed and reliable
+        process dictionary.
 *** 4. The app’s README mentions being non-deterministic. Can you prove if this is true? How?
+    - I have started the application twice, each time introspected it with command:
+      `sys:get_status(hd(gproc:lookup_pids({p, l, "Alfa"}))).`
+      - To have better view I could read records by `rr(council_member).`
+        - Example verbosity should be different for two consecutive runs, also
+          other fields like `accept`, `connected` will be different.
 *** 5. Can you express the dependency chain of applications in there? Generate a diagram of them?
+    - Yes, it is attached in this directory as a `app-deps.png` (and its source
+      version `app-deps.dot` also).
 *** 6. Can you add more processes to the main application than those described in the README?
+    - Yes, the only thing I have to do is to extend the `env` key called `names`
+      inside `council` application from `council.app.src` file, and then rebuild
+      the release.

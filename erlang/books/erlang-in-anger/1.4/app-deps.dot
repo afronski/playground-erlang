@@ -1,0 +1,1 @@
+digraph G { K=0.25; ratio=0.75; overlap="9:prism"; crypto [shape=box] gproc [shape=box] recon [shape=box] council->crypto council->gproc }
