@@ -1,11 +1,40 @@
 * 2.3 Exercises
 ** Review Questions
 *** 1. Are Erlang supervision trees started depth-first? breadth-first? Synchronously or asynchronously?
+    - Starting phase of the supervisors and its children is synchronous. It
+      starts everything in breadth-level manner, so level by level (and progress
+      is dependent on the types of the supervisor strategies).
 *** 2. What are the three application strategies? What do they do?
+    - `permanent` - If the application will terminate, the entire system is taken
+      down, excluding manual termination with `application:stop/1`.
+    - `transient` - If the application terminates for reason normal, that is
+      okay. Any other reason for termination shuts down the entire system.
+    - `temporary` - Application is allowed to stop for any reason. It will be
+      reported, but nothing bad will happen.
 *** 3. What are the main differences between the directory structure of an app and a release?
+    - Release is a combination of applications, "deployable" structure which
+      reflects how the system is built. There are two types of applications -
+      `apps` and `deps`.
+    - Application is a individual entity, which contains all implementation
+      details stored together in a source-compatible format.
 *** 4. When should you use a release?
-*** 5. Give two examples of the type of state that can go in a process’ init function, and two examples of the type of state that shouldn’t go in a process’ init function
+    - If you want to deploy your system to production or any other managed
+      infrastructure. It will ease maintenance and further management of that
+      system.
+*** 5. Give two examples of the type of state that can go in a process' init function, and two examples of the type of state that shouldn't go in a process' init function.
+    - Long story short, you should avoid any kind of side-effects, you should
+      prepare any reproducible state, any risky 3rd party call should be
+      considered as a not reproducible state. Sometimes things available on
+      Erlang VM can be considered as easily readable state, but it should be an
+      exception not a rule.
 ** Hands-On
 *** 1. Extract the main application hosted in the release to make it independent, and includable in other projects.
+    - It is not a big deal, you should move the application to the separate
+      repository and connect it with the release with `rebar` dependencies.
 *** 2. Host the application somewhere (Github, Bitbucket, local server), and build a release with that application as a dependency.
-*** 3. The main application’s workers (council_member) starts a server and connects to it in its init/1 function. Can you make this connection happen outside of the init function’s? Is there a benefit to doing so in this specific case?
+    - Not a problem, you can use even the original `ferd/recon_demo` Gitub
+      repository.
+*** 3. The main application's workers (council_member) starts a server and connects to it in its init/1 function. Can you make this connection happen outside of the init function's? Is there a benefit to doing so in this specific case?
+    - There is a benefit, because if server will not start (e.g. due to port
+      conflict), this particular child will fail and immediately will be
+      restarted by supervisor with different port associated.
