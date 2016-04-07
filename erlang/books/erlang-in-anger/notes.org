@@ -81,3 +81,57 @@
         node failure.
 ** Part II - Diagnosing Applications
 *** Connecting to Remote Nodes
+    - 4 ways for connecting to Erlang shell.
+      - Direct connection.
+        - Almost any operation is unsafe here, because you're doing it on actual
+          node.
+        - Especially JCL mode and invoking commands like `q().` or `halt().`.
+      - Remote shell connection (from *normal* or *hidden* node, to avoid fully
+        connected mesh afterwards).
+        - JCL mode is also available, but it is safer - you'll shutdown remote
+          node, instead the proper one.
+      - SSH connection - it has built-in SSH client and server, you need to
+        generate keys and configure it properly (2 commands).
+        - Almost any operation is unsafe here, because you're operating on
+          actual node.
+      - Named pipe (`run_erl` and `to_erl` commands), it is about redirecting
+        standard descriptors to a named UNIX pipe.
+    - Erlang REPL is not exactly a REPL, it is something with REPL
+      characteristic. But it is completely independent and parallel to the rest.
+      - It is a client-server like infrastructure, with complete independence.
+        It is built like that because, VM does not need interpreter to run BEAM
+        files, so it is sometimes an unnecessary dependency to have on
+        production.
+*** Introspection and Metrics
+    - Introspection and metrics, a truckload of them available directly from
+      Erlang shell. Part of them can be unsafe, because of amount of data
+      they'll return.
+    - `erlang:process_info/1` is your friend at most cases, but `recon` contains
+      safer version of that function, which is also more convenient because it
+      groups the parameters and has help message, which describes each one in
+      details.
+    - Full introspection is available for normal processes, but it is even more
+      convenient for OTP-like processes. They've got additional facilities in
+      `sys` module - exposing internal state, FSM statuses etc. is a built-in
+      functionality in OTP behaviors. That is a reason why you should use
+      `proc_lib` for your custom processes, because it will provide many of
+      those common facilities for you.
+    - Not only processes, ETS - but also CPU, schedulers, ports are available
+      for full introspection. Any detail inside VM is available for you. And
+      you've got even more powerful facility called `tracing` for debugging
+      stuff in real-time.
+      - But it is helpful when you have exact entry points and functions which
+        you can trace. Then you can do it even on production, without affecting
+        the performance.
+*** Debugging Crash Dumps
+    - Erlang crash dump is a well defined and document way of saving last breath
+      of the VM. Library `recon` contains a lot of helpful tools for parsing it
+      and extracting message queue details (e.g. bu `queue_fun.awk`).
+    - Most probable reason why you'll see a crash dump is exhausting memory (by
+      atom table, memory fragmentation, a lot of unconsumed messages in one
+      process, overloading one process - a bottleneck).
+    - Other reason is that one of your applications restarted too many times and
+      whole node shutdown.
+    - Besides that it will happen when you'll deal with NIFs - and that's really
+      bad stuff, because it means that sometimes you're so deep inside VM that
+      you'll be on your own.
