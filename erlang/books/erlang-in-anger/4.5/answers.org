@@ -1,9 +1,22 @@
 * 4.5 Exercises
 ** Review Questions
 *** 1. What are the 4 ways to connect to a remote node?
-*** 2. Can you connect to a node that wasn’t given a name?
+    - JCL from other node.
+    - Direct remote shell connection from CLI.
+    - Via SSH.
+    - Via named pipe.
+*** 2. Can you connect to a node that wasn't given a name?
+    - Only via named pipe, which does not require explicit distribution.
 *** 3. What’s the command to go into the Job Control Mode (JCL)?
+    - CTRL + G (^G).
 *** 4. Which method(s) of connecting to a remote shell should you avoid for a system that outputs a lot of data to standard output?
-*** 5. What instances of remote connections shouldn’t be disconnected using ˆG?
+    - Named pipe, because it will `fsync` every standard output string to the
+      file, posted as a third argument in `run_erl`.
+*** 5. What instances of remote connections shouldn't be disconnected using ˆG?
+    - Named pipe, because you can use CTRL + D (^D) and SSH connection, because
+      you're directly connected to an Erlang node.
 *** 6. What command(s) should never be used to disconnect from a session?
+    - `q().` or `halt().` because it will switch off the whole node.
 *** 7. Can all of the methods mentioned support having multiple users connected onto the same Erlang node without issue?
+    - Only JCL and `remsh` from CLI supports that. SSH is sharing one user
+      across sessions. The same applies to the named pipe.

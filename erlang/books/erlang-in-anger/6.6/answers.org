@@ -1,9 +1,26 @@
 * 6.6 Exercises
 ** Review Questions
 *** 1. How can you choose where a crash dump will be generated?
+    - By passing filename and path to `ERL_CRASH_DUMP` environment variable.
 *** 2. What are common avenues to explore if the crash dump shows that the node ran out of memory?
+    - Processes message queue length.
+    - Particular sections of system memory allocated by VM (atom table, binaries
+      etc.).
+    - Low overall memory usage, but still can't allocate new piece - memory
+      fragmentation.
+    - Maximum number of application restarts.
+    - Too many file descriptors opened.
 *** 3. What should you look for if the process count is suspiciously low?
+    - For memory piece related with VM system elements (like atom table, ETS,
+      binaries etc.).
 *** 4. If you find the node died with a process having a lot of memory, what could you do to find out which one it was?
+    - You can use `recon's` script called `queue_fun.awk` for determining which
+      one was running during the crash time.
 ** Hands-On
 *** 1. What are specific outliers that could point to an issue?
+    - A lot of messages gathered in one process.
+    - A lot of memory allocated by one process.
+    - A lot of TCP file descriptors opened.
 *** 2. Does it look like repeated errors are the issue? If not, what could it be?
+    - It can be an effect of overload or resource leak, because a lot of TCP
+      connections are opened and are actually used.

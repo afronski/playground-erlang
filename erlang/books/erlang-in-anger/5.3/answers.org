@@ -1,32 +1,135 @@
 * 5.3 Exercises
 ** Review Questions
-*** 1. What kind of values are reported for Erlang’s memory?
-*** 2. What’s a valuable process-related metric for a global view?
-*** 3. What’s a port, and how should it be monitored globally?
-*** 4. Why can’t you trust top or htop for CPU usage with Erlang systems? What’s the alternative?
+*** 1. What kind of values are reported for Erlang's memory?
+    - VM reports two groups of memory allocation (both related to memory
+      allocated by VM) - `processes` (heaps, message queues and other stuff
+      related with processes) and `system` (rest of stuff - ETS, shared
+      binaries, VM internal stuff).
+*** 2. What's a valuable process-related metric for a global view?
+    - Run queue (amount of scheduled future work) and amount of active
+      processes, if you know your average value at that hour.
+*** 3. What's a port, and how should it be monitored globally?
+    - Port is a way of communicating with external program / driver.
+*** 4. Why can't you trust top or htop for CPU usage with Erlang systems? What's the alternative?
+    - Because schedulers are doing a lot of stuff (e.g. busy looping) and Erlang
+      processes are working in terms of reductions.
 *** 5. Name two types of signal-related information available for processes.
+    - All linked processes and monitors are available as a metric.
 *** 6. How can you find what code a specific process is running?
+    - You can look into `current_function` and `current_location` tuples.
 *** 7. What are the different kinds of memory information available for a specific process?
+    - There is information about allocated `refc binaries`, heap size, message
+      queue length and so on.
 *** 8. How can you know if a process is doing a lot of work?
+    - By looking into amount of reductions, higher counter means more work done.
 *** 9. Name a few of the values that are dangerous to fetch when inspecting processes in a production system.
+    - Process dictionary, binary and other stuff that handles content generated
+      during process work time.
 *** 10. What are some features provided to OTP processes through the sys module?
+    - Exposing internal state, behavior related internals, things related with
+      process management on VM.
 *** 11. What kind of values are available when inspecting inet ports?
+    - Internals related to network traffic (e.g. amount of sent and received
+      bytes, octets and so on).
 *** 12. How can you find the type of a port (Files, TCP, UDP)?
+    - By introspecting it with `erlang:port_info/2` and checking `name`
+      property.
 ** Open-ended Questions
 *** 1. Why do you want a long time window available on global metrics?
+    - In order to catch bursts of short lived processes and properly calculate
+      workload for long living processes.
 *** 2. Which would be more appropriate between recon:proc_count/2 and recon:proc_window/3 to find issues with: Reductions, Memory, Message queue length?
+    - `recon:proc_window/3` will be better, because it will sample the probes
+      and measurements.
 *** 3. How can you find information about who is the supervisor of a given process?
+    - By using detailed introspection with `sys` module.
 *** 4. When should you use recon:inet_count/2? recon:inet_window/3?
+    - Count should be used to obtain general and overview related metrics for
+      network layer. Windowing and sampling should be a way to obtain exact
+      results for long and short lived processes together.
 *** 5. What could explain the difference in memory reported by the operating system and the memory functions in Erlang?
-*** 6. Why is it that Erlang can sometimes look very busy even when it isn’t?
-*** 7. How can you find what proportion of processes on a node are ready to run, but can’t be scheduled right away?
+    - Operating system metrics involves memory used and allocated by VM
+      internals and VM itself, Erlang memory metrics shows only that memory that
+      is allocated by VM.
+*** 6. Why is it that Erlang can sometimes look very busy even when it isn't?
+    - Because schedulers are doing busy looping to be better prepared to sudden
+      spikes - it is a trick to cheat OS-level schedulers which will kick Erlang
+      VM process out when it does nothing.
+*** 7. How can you find what proportion of processes on a node are ready to run, but can't be scheduled right away?
+    - Seek for `runnable` in `erlang:process_info/1` results - those processes
+      could be scheduled but they can't (other process hogs the scheduler).
 ** Hands-On
-*** 1. What’s the system memory?
+*** 1. What's the system memory?
+    ```
+    (recon_demo@127.0.0.1)4> erlang:memory().
+    [{total,16269424},
+     {processes,5731696},
+     {processes_used,5731168},
+     {system,10537728},
+     {atom,215345},
+     {atom_used,209218},
+     {binary,246960},
+     {code,5027900},
+     {ets,337504}]
+    ```
 *** 2. Is the node using a lot of CPU resources?
+    - Not really, `htop` didn't show anything suspicious.
 *** 3. Is any process mailbox overflowing?
+    - Both checks shows that no has too long mailbox:
+      - `recon:proc_count(message_queue_len, 3).`
+      - `recon:proc_window(message_queue_len, 3, 5000).`
 *** 4. Which chatty process (council_member) takes the most memory?
+    ```
+    (recon_demo@127.0.0.1)10> recon:proc_count(memory, 3).
+    [{<0.34.0>,264064,
+     [{current_function,{shell,shell_rep,4}},
+      {initial_call,{erlang,apply,2}}]},
+    {<0.12.0>,263944,
+     [code_server,
+      {current_function,{code_server,loop,1}},
+      {initial_call,{erlang,apply,2}}]},
+    {<0.3.0>,109232,
+     [erl_prim_loader,
+      {current_function,{erl_prim_loader,loop,3}},
+      {initial_call,{erlang,apply,2}}]}]
+    ```
 *** 5. Which chatty process is eating the most CPU?
+    ```
+    (recon_demo@127.0.0.1)9> recon:proc_count(reductions, 3).
+    [{<0.3.0>,142447,
+      [erl_prim_loader,
+       {current_function,{erl_prim_loader,loop,3}},
+       {initial_call,{erlang,apply,2}}]},
+     {<0.12.0>,53400,
+      [code_server,
+       {current_function,{code_server,loop,1}},
+       {initial_call,{erlang,apply,2}}]},
+     {<0.96.0>,14031,
+      [{current_function,{gen_server,loop,6}},
+      {initial_call,{proc_lib,init_p,5}}]}]
+    ```
 *** 6. Which chatty process is consuming the most bandwidth?
+    ```
+    (recon_demo@127.0.0.1)6> recon:inet_count(recv_oct, 3).
+    [{#Port<0.396>,15181,[{recv_oct,15181}]},
+     {#Port<0.417>,14456,[{recv_oct,14456}]},
+     {#Port<0.438>,14159,[{recv_oct,14159}]}]
+    ```
 *** 7. Which chatty process sends the most messages over TCP? The least?
+    - `recon:inet_count(send_cnt, 3).`
+    - And results:
+    ```
+    (recon_demo@127.0.0.1)5> recon:inet_count(send_cnt, 3).
+    [{#Port<0.416>,12,[{send_cnt,12}]},
+     {#Port<0.377>,9,[{send_cnt,9}]},
+     {#Port<0.443>,8,[{send_cnt,8}]}]
+    ```
 *** 8. Can you find out if a specific process tends to hold multiple connections or file descriptors open at the same time on a node?
+    ```
+    (recon_demo@127.0.0.1)11> recon:port_types().
+      [{"tcp_inet",80},{"efile",2},{"2/2",1},{"tty_sl -c -e",1}]
+    (recon_demo@127.0.0.1)12> recon:files().
+      [#Port<0.0>,#Port<0.207>]
+    ```
 *** 9. Can you find out which function is being called by the most processes at once on the node right now?
+    - You have to use tracing and narrow down your search to couple of functions.
