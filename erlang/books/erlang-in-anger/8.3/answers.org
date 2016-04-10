@@ -1,8 +1,19 @@
 * 8.3 Exercises
 ** Review Questions
 *** 1. What are the two main approaches to pin issues about CPU usages?
+    - Profiling (with use of tracing).
+    - Sampling with use of `recon` (and internally `erlang:process_info/1`).
 *** 2. Name some of the profiling tools available. What approaches are preferable for production use? Why?
+    - `eprof`, `fprof` and `eflame`. They're not approachable when it comes to
+      production because they use tracing, in a very expensive way.
 *** 3. Why can long scheduling monitors be useful to find CPU or scheduler over-consumption?
+    - Because internally it may be related to long GC pauses or other blockage,
+      which will be undetected by tracing and sampling.
 ** Open-ended Questions
 *** 1. If you find that a process doing very little work with reductions ends up being scheduled for long periods of time, what can you guess about it or the code it runs?
+    - It does something which is not often executed by schedulers, e.g. it does
+      not receive a lot of messages.
 *** 2. Can you set up a system monitor and then trigger it with regular Erlang code? Can you use it to find out for how long processes seem to be scheduled on average? You may need to manually start random processes from the shell that are more aggressive in their work than those provided by the existing system.
+    - It is possible, you need to prepare monitor and that process, you need to
+      keep in mind that they should be linked with shell, that when you'll quit
+      it they will be cleaned up.

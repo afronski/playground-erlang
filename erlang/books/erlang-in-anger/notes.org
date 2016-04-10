@@ -142,3 +142,130 @@
     - Besides that it will happen when you'll deal with NIFs - and that's really
       bad stuff, because it means that sometimes you're so deep inside VM that
       you'll be on your own.
+*** Memory Leaks
+    - Besides programmers bug, crossing the `ulimit`s the most often cause of
+      bringing down whole machine is to overrun memory by some kind of leak.
+      - It can be a simple to figure out situation (e.g. binary leaks, atom
+        table limit hit) or something really complicated (e.g. memory
+        fragmentation).
+      - Don't create new atom from source that comes from user or 3rd party
+        systems, `erlang:list_to_existing_atom/1` is your friend. Check if your
+        SAX parser is safe (`xmerl` is not entirely safe). Random names
+        generation, which will be associated for nodes as well could be a case.
+      - In case of `code` related memory, it can be related either with
+        unauthorized access to your system, not garbage collected code after hot
+        code reload or HiPE compilation, which will not be garbage collected,
+        because it is a native code.
+      - ETS is never GCed, you can reclaim memory only by removing records or
+        deleting table. You can use undocumented `ets:i().` for investigating
+        numbers, if that is not a case you need to either shard data across
+        multiple servers or compress your table to buy some time.
+      - For a process memory, you can either leak processes itself, the easiest
+        way to find leaked processes is to seek for not linked processes.
+        - `recon:proc_count(memory, 3).` shows the top 3 processes which have
+          the biggest memory usage.
+        - You can observe GC, which is another step to figure out problems with
+          memory, and it can indicate that spikes, in for allocations are
+          happening in VM. When memory is a scarce resource, this can be a
+          problem. Tracking GC pauses, can be done with command invoked form
+          shell: `erlang:system_monitor(self(), [{long_gc, 500}]).`, that will
+          setup system monitor which will report GC pauses longer than 500 ms to
+          the shell.
+      - If it is not a memory fragmentation, binary leak, or neither of above
+        probably it can be something with misbehaving NIFs, C driver or even VM
+        is leaking.
+      - For binaries leak, it will affect binaries larger than 64 B, because
+        those are reference counted, and not included in process heap.
+        - `recon:proc_count(binary_memory, 3).` returns 3 top most processes
+          that have most size of allocated binaries.
+        - `recon:bin_leak(5).` returns 5 top most processes that freed the most
+          of binaries after forcing complete GC for whole system.
+        - For fixing that you can suspend the process, spin-off the one time
+          processes for handling binaries, slice the binaries and store only
+          smaller chunk (size < 64 B). Or as last resort you can call GC at
+          given intervals manually (icky) or stop using binaries (how?).
+          - Beware middleman processes that are routing binaries, they're often
+            the case. Pass binaries directly to the process that will handle
+            them (e.g. data from socket).
+      - For memory fragmentation often Erlang VM will report significantly
+        smaller memory usage then system metrics are reporting. Also for a huge
+        allocation, after GC not all of that memory will be freed. But keep in
+        mind that it affects long living systems that have uptime around weeks
+        and months.
+        - `recon_alloc` is a module dedicated to such issues.
+          - `recon_alloc:memory(usage).` call will report lower percentage than
+            90-80% for a memory fragmentation (it returns percentage of memory
+            actually allocated by Erlang VM for your system and processes vs.
+            memory obtained from OS by Erlang VM).
+          - if additionally `recon_alloc:memory(allocated).` matches what OS
+            reports it means that very probably you have memory leak from Erlang
+            terms or memory fragmentation.
+    - How the memory in Erlang VM is structured?
+      - You have got hierarchy, with two layers - two main allocators
+        (`sys_alloc` which uses `malloc`, `mseg_alloc` which uses `mmap`) and 9
+        different sub-allocators that are handling different types of
+        allocations. Each one has different strategy of allocation - best fit, a
+        fit, best fit for address etc. The only way to fix the memory
+        fragmentation is to tweak those settings and verify if it helps in the
+        long run, and because it happens after a long time for a few cases, it
+        will take a long time to determine if it is fixed or not.
+*** CPU and Scheduler Hogs
+    - It is generally difficult to properly analyze the CPU usage of an Erlang
+      node to pin problems to a specific piece of code. With everything
+      concurrent and in a virtual machine, there is no guarantee you will find
+      out if a specific process, driver, your own Erlang code, NIFs you may have
+      installed, or some third-party library is eating up all your processing
+      power.
+    - The existing approaches are often limited to profiling and
+      reduction-counting if it’s in your code, and to monitoring the scheduler’s
+      work if it might be anywhere else (but also your code).
+    - Two ways of detecting:
+      - Profiling (it uses tracing, beware!):
+        - eprof - oldest, deliver percentage usage.
+        - fprof - more powerful, very detailed.
+        - eflame - newest one, generates flame graphs.
+      - `recon:proc_window(reductions, 3, 500).`
+        - It works on reductions, higher reductions count is mostly related with
+          higher CPU usage. Second argument means top N, third argument means
+          lowest possible threshold.
+      - You've got available also `erlang:system_monitor/1` facility with
+        argument `long_schedule` - it can confirm that your problems have nature
+        related with NIFs and internals, something that break the schedulers
+        (often long running NIFs are messing up with schedulers and their
+        reductions count).
+        - Also beware of long GC pauses, because their will affect scheduling.
+      - If until then, nothing shown an obvious thing you should point into
+        suspended ports, by investigating results of system monitor from
+        `busy_port` and `busy_dist_port` (when you're using Distributed Erlang).
+        - If that's the culprit you can pass `nosuspend` to
+          `erlang:port_command/3` method as an option and the same option for
+          `erlang:send/3` when communicating with remote node.
+*** Tracing
+    - Forget about debuggers in Erlang world, usage is really limited.
+      - How you'll do breaks in concurrent world of so many processes?
+        - You can't and deal with it. ;)
+    - Five modules:
+      - `sys` which provides a lot of information for OTP compliant processes.
+        However it is limited to the development mode, due to lack of
+        redirection to remote shell and throttling.
+      - `dbg` tracing interface, with clunky API, but still really powerful. And
+        you have to know what are you doing, because it can kill node under 2
+        seconds.
+      - *Tracing BIFs* in large application they'll be hard to use, due to raw
+        usage, but they might be useful in development mode.
+      - `redbug` is a production safe library, part of `eper` suite. It has rate
+        limiter, nice interface.
+      - `recon_trace` is available with `recon` - the goal was to provide
+        `redbug` but without additional dependencies from `eper` suite. It can
+        trace only function calls, not messages as `redbug` and API for rate
+        limiting and usage is different.
+    - Start with a very limited scope, and then progressively broaden it when
+      you made progress.
+** Conclusion
+   - "I hope that after reading this text, the next time stuff goes bad, it
+     won’t go too bad."
+   - Even the cleanest systems, that are in the wild, in maintenance mode have
+     some edges and corners, and during that time everyone have to face the
+     errors.
+   - "Even the most solid bridges need to be repainted all the time in order
+     avoid corrosion to the point of their collapse."
