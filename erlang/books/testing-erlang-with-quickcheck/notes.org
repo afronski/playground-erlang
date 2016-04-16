@@ -1,1 +1,44 @@
 * Testing Erlang with QuickCheck
+
+- Three tools - Triq, Erlang QuickCheck (by Quviq), PropEr.
+  - First one is done on Apache License, second is a paid software which need
+    license and last is on GPL.
+- Whole approach is to create properties, which can be then exploited by
+  generators and creating test data. It allows you to test many cases, detect
+  "Black Swans" and invoke longer test runs, which are giving you more accuracy
+  and certainty, that all cases are covered.
+  - Whole complexity is related with creating models (set of properties which
+    are representing your stateful system) or properties (way of deterministic
+    and verifiable proofs that your system, module, function works).
+- Full and complete suits should run with *nightly builds*. Also, because test
+  cases are randomly generated you should investigate each failure and save
+  counter examples, because they can be hard to reproduce, if they're happening rarely.
+  - Whole approach with generating cases is related with generating a lot of
+    steps / inputs and then, after finding a failure doing shrinking - which
+    will find smallest example which causes the same error.
+- Shrinking and generators - custom shrinking is a thing - if you're building
+  custom generators you probably want to build a custom shrinking algorithm,
+  however there are a lot of built-in generators in place, e.g. PropEr is almost
+  so complete As EQC - latter has advantange related to NIFs, testing C code,
+  and more complex state machines and asynchronous models.
+  - Generators can be modifed in terms of size, structure of generated output
+    (recursive or not), and other stuff. It is relatively easy to generate JSON,
+    XML etc., whole problem is related with shrinking, because it has to
+    preserve the features of the previously generated example.
+- Stateful tests are based on `statem` models - it is an internal thing for EQC
+  and PropEr. There can be only one property per model, generators are creating
+  series of commamds, then created by you *pre and post conditions* are checking
+  state of the system, the same structure and workflow applies for e.g. testing
+  finite state machines, but you can use different helper - `fsm`.
+- Patterns:
+  - *Rount-trip tests* - they can be described by *math* property `x =
+    f(g(x))` - e.g. encode / decode.
+    - *Other math properties* are also relatively easy to test.
+    - Examples: things with *zero*, or *identity* properties (*Monoids*),
+      idempotent operations.
+  - *Data structures*, *vector clocks* etc. are also easy to test, because there
+    is underlying math and proofs defined already.
+  - *Testing vs. external implementation* - e.g. encode can be verified and
+    tested with an existing, external tool - you've created JSON encoding, you
+    can verify its validity by invoking command which validates it from
+    *Python*.
